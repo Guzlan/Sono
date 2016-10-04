@@ -1,0 +1,342 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C54372C31DA01BB900BBCD87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54372C21DA01BB900BBCD87 /* AppDelegate.swift */; };
+		C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54372C41DA01BB900BBCD87 /* ViewController.swift */; };
+		C54372C81DA01BB900BBCD87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54372C61DA01BB900BBCD87 /* Main.storyboard */; };
+		C54372CA1DA01BB900BBCD87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C54372C91DA01BB900BBCD87 /* Assets.xcassets */; };
+		C54372CD1DA01BB900BBCD87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54372CB1DA01BB900BBCD87 /* LaunchScreen.storyboard */; };
+		C57941E81DA3F286002FE927 /* heart-7.png in Resources */ = {isa = PBXBuildFile; fileRef = C57941E71DA3F286002FE927 /* heart-7.png */; };
+		C57941EA1DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */; };
+		C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */; };
+		C5CD0EED1DA024B700B1355D /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */; };
+		C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */; };
+		C5CD0EF51DA14AF700B1355D /* e4.png in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0EF41DA14AF700B1355D /* e4.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C54372BF1DA01BB900BBCD87 /* Sono.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sono.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C54372C21DA01BB900BBCD87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C54372C41DA01BB900BBCD87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C54372C71DA01BB900BBCD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C54372C91DA01BB900BBCD87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C54372CC1DA01BB900BBCD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C54372CE1DA01BB900BBCD87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C57941E71DA3F286002FE927 /* heart-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-7.png"; sourceTree = "<group>"; };
+		C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "heart-rate-graph-big-red-35515205.jpg"; sourceTree = "<group>"; };
+		C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
+		C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
+		C5CD0EF41DA14AF700B1355D /* e4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e4.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C54372BC1DA01BB900BBCD87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C54372B61DA01BB900BBCD87 = {
+			isa = PBXGroup;
+			children = (
+				C54372C11DA01BB900BBCD87 /* Sono */,
+				C54372C01DA01BB900BBCD87 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C54372C01DA01BB900BBCD87 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C54372BF1DA01BB900BBCD87 /* Sono.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C54372C11DA01BB900BBCD87 /* Sono */ = {
+			isa = PBXGroup;
+			children = (
+				C5CD0EF61DA14B0D00B1355D /* images */,
+				C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */,
+				C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */,
+				C54372C21DA01BB900BBCD87 /* AppDelegate.swift */,
+				C54372C41DA01BB900BBCD87 /* ViewController.swift */,
+				C54372C61DA01BB900BBCD87 /* Main.storyboard */,
+				C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */,
+				C54372C91DA01BB900BBCD87 /* Assets.xcassets */,
+				C54372CB1DA01BB900BBCD87 /* LaunchScreen.storyboard */,
+				C54372CE1DA01BB900BBCD87 /* Info.plist */,
+			);
+			path = Sono;
+			sourceTree = "<group>";
+		};
+		C5CD0EF61DA14B0D00B1355D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C57941E71DA3F286002FE927 /* heart-7.png */,
+				C5CD0EF41DA14AF700B1355D /* e4.png */,
+				C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C54372BE1DA01BB900BBCD87 /* Sono */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C54372D11DA01BB900BBCD87 /* Build configuration list for PBXNativeTarget "Sono" */;
+			buildPhases = (
+				C54372BB1DA01BB900BBCD87 /* Sources */,
+				C54372BC1DA01BB900BBCD87 /* Frameworks */,
+				C54372BD1DA01BB900BBCD87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sono;
+			productName = Sono;
+			productReference = C54372BF1DA01BB900BBCD87 /* Sono.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C54372B71DA01BB900BBCD87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Amro Gazlan";
+				TargetAttributes = {
+					C54372BE1DA01BB900BBCD87 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 8ZK23DRA3H;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = C54372BA1DA01BB900BBCD87 /* Build configuration list for PBXProject "Sono" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C54372B61DA01BB900BBCD87;
+			productRefGroup = C54372C01DA01BB900BBCD87 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C54372BE1DA01BB900BBCD87 /* Sono */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C54372BD1DA01BB900BBCD87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C57941EA1DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg in Resources */,
+				C54372CD1DA01BB900BBCD87 /* LaunchScreen.storyboard in Resources */,
+				C57941E81DA3F286002FE927 /* heart-7.png in Resources */,
+				C54372CA1DA01BB900BBCD87 /* Assets.xcassets in Resources */,
+				C54372C81DA01BB900BBCD87 /* Main.storyboard in Resources */,
+				C5CD0EF51DA14AF700B1355D /* e4.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C54372BB1DA01BB900BBCD87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5CD0EED1DA024B700B1355D /* BWWalkthroughViewController.swift in Sources */,
+				C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */,
+				C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */,
+				C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */,
+				C54372C31DA01BB900BBCD87 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C54372C61DA01BB900BBCD87 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C54372C71DA01BB900BBCD87 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C54372CB1DA01BB900BBCD87 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C54372CC1DA01BB900BBCD87 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C54372CF1DA01BB900BBCD87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C54372D01DA01BB900BBCD87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C54372D21DA01BB900BBCD87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8ZK23DRA3H;
+				INFOPLIST_FILE = Sono/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		C54372D31DA01BB900BBCD87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8ZK23DRA3H;
+				INFOPLIST_FILE = Sono/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C54372BA1DA01BB900BBCD87 /* Build configuration list for PBXProject "Sono" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C54372CF1DA01BB900BBCD87 /* Debug */,
+				C54372D01DA01BB900BBCD87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C54372D11DA01BB900BBCD87 /* Build configuration list for PBXNativeTarget "Sono" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C54372D21DA01BB900BBCD87 /* Debug */,
+				C54372D31DA01BB900BBCD87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C54372B71DA01BB900BBCD87 /* Project object */;
+}
