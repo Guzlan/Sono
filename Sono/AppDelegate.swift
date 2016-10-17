@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//
+        EmpaticaAPI.authenticate(withAPIKey:"1d6e511c753f4f8f8d6f8ea7a672839c") { (success : Bool, description: String?) in
+            if description != nil{
+                print("connected to the API \(success)")
+            }
+        }
         return true
     }
 

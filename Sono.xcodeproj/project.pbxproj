@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7AB1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework */; };
+		C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */; };
 		C54372C31DA01BB900BBCD87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54372C21DA01BB900BBCD87 /* AppDelegate.swift */; };
 		C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54372C41DA01BB900BBCD87 /* ViewController.swift */; };
 		C54372C81DA01BB900BBCD87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54372C61DA01BB900BBCD87 /* Main.storyboard */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C522A7AA1DB41E81003D5913 /* EmpaticaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmpaticaBridge.h; sourceTree = "<group>"; };
+		C522A7AB1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EmpaLink-ios-0.7-full.framework"; path = "/Users/Amr/Developer/iOS/Sono/EmpaLink-ios-0.7-full.framework"; sourceTree = "<absolute>"; };
+		C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "EmpaLink-ios-0.7-full.framework"; sourceTree = "<group>"; };
 		C54372BF1DA01BB900BBCD87 /* Sono.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sono.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54372C21DA01BB900BBCD87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C54372C41DA01BB900BBCD87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,17 +46,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
+				C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C522A7A91DB4188F003D5913 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C54372B61DA01BB900BBCD87 = {
 			isa = PBXGroup;
 			children = (
 				C54372C11DA01BB900BBCD87 /* Sono */,
 				C54372C01DA01BB900BBCD87 /* Products */,
+				C522A7A91DB4188F003D5913 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +92,7 @@
 				C54372C91DA01BB900BBCD87 /* Assets.xcassets */,
 				C54372CB1DA01BB900BBCD87 /* LaunchScreen.storyboard */,
 				C54372CE1DA01BB900BBCD87 /* Info.plist */,
+				C522A7AA1DB41E81003D5913 /* EmpaticaBridge.h */,
 			);
 			path = Sono;
 			sourceTree = "<group>";
@@ -124,6 +141,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 8ZK23DRA3H;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -220,6 +242,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -236,7 +259,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -269,6 +292,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -279,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -292,11 +316,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8ZK23DRA3H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Sono/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/Amr/Developer/iOS/Sono/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -306,11 +335,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8ZK23DRA3H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Sono/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/Amr/Developer/iOS/Sono/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
