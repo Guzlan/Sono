@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dDh-or-XKn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2338c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dDh-or-XKn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="2036" y="-215"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="xGz-h0-2AT">
             <objects>
-                <viewController id="3i0-m3-Tau" sceneMemberID="viewController">
+                <viewController id="3i0-m3-Tau" customClass="mainViewController" customModule="Sono" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jdf-je-P7u"/>
                         <viewControllerLayoutGuide type="bottom" id="Z9o-O0-ynQ"/>
@@ -253,12 +253,6 @@
                                     <tabBarItem title="" badgeValue="!" systemItem="mostRecent" id="OmK-26-3BR"/>
                                 </items>
                             </tabBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="heart-rate-graph-big-red-35515205.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wKw-7w-MxU">
-                                <frame key="frameInset" minY="225" width="375" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="C65-aw-tB8"/>
-                                </constraints>
-                            </imageView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ca1-Cd-xbo">
                                 <frame key="frameInset" minY="28" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -268,24 +262,25 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7k-HR-Yc2">
+                                <frame key="frameInset" minX="108" minY="263" width="159" height="140"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="SCAN"/>
+                                <connections>
+                                    <action selector="scanDevices:" destination="3i0-m3-Tau" eventType="touchUpInside" id="tCh-Id-9YE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="wKw-7w-MxU" firstAttribute="leading" secondItem="map-K2-e2Q" secondAttribute="leadingMargin" constant="-16" id="Ck4-Dn-2YP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wKw-7w-MxU" secondAttribute="trailing" constant="-16" id="I4L-4H-D5k"/>
-                            <constraint firstItem="wKw-7w-MxU" firstAttribute="centerY" secondItem="map-K2-e2Q" secondAttribute="centerY" id="MAQ-Dg-Apj"/>
-                            <constraint firstItem="wKw-7w-MxU" firstAttribute="centerX" secondItem="map-K2-e2Q" secondAttribute="centerX" id="XDi-yc-yVt"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUO-PE-zGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3000.8000000000002" y="-197.45127436281859"/>
+            <point key="canvasLocation" x="2792.8000000000002" y="-266.71664167916043"/>
         </scene>
     </scenes>
     <resources>
         <image name="e4.png" width="500" height="514"/>
         <image name="heart-7.png" width="30" height="30"/>
-        <image name="heart-rate-graph-big-red-35515205.jpg" width="1297" height="583"/>
     </resources>
 </document>
