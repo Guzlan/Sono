@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2338c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dDh-or-XKn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2338c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GgH-ls-ELy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -277,6 +277,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUO-PE-zGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2792.8000000000002" y="-266.71664167916043"/>
+        </scene>
+        <!--Bar View Controller-->
+        <scene sceneID="aae-Ca-pYL">
+            <objects>
+                <viewController id="GgH-ls-ELy" customClass="BarViewController" customModule="Sono" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cXD-JQ-NGo"/>
+                        <viewControllerLayoutGuide type="bottom" id="7g9-Ej-t09"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bog-U1-Qmw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HXV-iQ-rrh" customClass="BarChartView" customModule="Charts">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HXV-iQ-rrh" firstAttribute="top" secondItem="cXD-JQ-NGo" secondAttribute="bottom" constant="169" id="5nK-Om-jmw"/>
+                            <constraint firstItem="HXV-iQ-rrh" firstAttribute="centerY" secondItem="bog-U1-Qmw" secondAttribute="centerY" id="GPM-oF-ItP"/>
+                            <constraint firstItem="HXV-iQ-rrh" firstAttribute="leading" secondItem="bog-U1-Qmw" secondAttribute="leadingMargin" id="XAZ-Iq-V7u"/>
+                            <constraint firstItem="HXV-iQ-rrh" firstAttribute="trailing" secondItem="bog-U1-Qmw" secondAttribute="trailingMargin" id="ioc-Vl-uGi"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="barChartView" destination="HXV-iQ-rrh" id="dch-Ht-7kq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Dm-Sl-16j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3691.5" y="-391.5"/>
         </scene>
     </scenes>
     <resources>

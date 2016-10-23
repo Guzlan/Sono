@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mainViewController :UIViewController, EmpaticaDelegate {
+class mainViewController :UIViewController, EmpaticaDelegate, EmpaticaDeviceDelegate {
   
     @IBAction func scanDevices(_ sender: UIButton) {
         print("Started scanning for E4's...")
@@ -26,6 +26,7 @@ class mainViewController :UIViewController, EmpaticaDelegate {
     func didDiscoverDevices(_ devices: [Any]!) {
         if devices.count > 0 {
            print("I was able to find \(devices.count)")
+            (devices[0] as! EmpaticaDeviceManager).connect(with: self)
         }
         else{
             print("I was not able to find devices")
@@ -42,5 +43,8 @@ class mainViewController :UIViewController, EmpaticaDelegate {
         default:
             print ("No idea about the status")
         }
+    }
+    func didReceiveAccelerationX(_ x: Int8, y: Int8, z: Int8, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
+        print("(\(x),\(y),\(z))")
     }
 }
