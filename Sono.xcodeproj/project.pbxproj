@@ -430,7 +430,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/Amr/Developer/iOS/Sono/Sono/EmpaticaBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -450,7 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/Amr/Developer/iOS/Sono/Sono/EmpaticaBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
