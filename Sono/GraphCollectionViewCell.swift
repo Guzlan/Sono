@@ -24,10 +24,12 @@ class GraphCollectionViewCell: UICollectionViewCell {
 //        self.layer.cornerRadius = 10
         graphChart.layer.cornerRadius = 10
         graphChart.clipsToBounds = true
+        
         //self.backgroundColor = UIColor.blue
         //graphChart.backgroundColor = UIColor.red
-        graphChart.layer.borderWidth = 2
-        graphChart.layer.borderColor = UIColor.black.cgColor
+        //graphChart.layer =
+        graphChart.layer.borderWidth = 1
+        graphChart.layer.borderColor = UIColor.white.cgColor
         
         
         graphChart.noDataText = "No data yo"

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mainViewController :UIViewController, EmpaticaDelegate, EmpaticaDeviceDelegate {
+class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDelegate{
   
     @IBAction func scanDevices(_ sender: UIButton) {
         print("Started scanning for E4's...")
@@ -43,8 +43,5 @@ class mainViewController :UIViewController, EmpaticaDelegate, EmpaticaDeviceDele
         default:
             print ("No idea about the status")
         }
-    }
-    func didReceiveAccelerationX(_ x: Int8, y: Int8, z: Int8, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
-        print("(\(x),\(y),\(z))")
     }
 }

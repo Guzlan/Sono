@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2338c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CHa-UO-EGA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2338c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dDh-or-XKn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -217,7 +217,7 @@
                                 </state>
                                 <connections>
                                     <action selector="nextPage" destination="BYZ-38-t0r" eventType="touchUpInside" id="sGP-yh-B3z"/>
-                                    <segue destination="3i0-m3-Tau" kind="show" id="D88-mg-GNp"/>
+                                    <segue destination="YPd-h7-Nmz" kind="show" id="D88-mg-GNp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -255,30 +255,23 @@
                                     <tabBarItem title="" badgeValue="!" systemItem="mostRecent" id="OmK-26-3BR"/>
                                 </items>
                             </tabBar>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ca1-Cd-xbo">
-                                <frame key="frameInset" minX="-1" minY="28" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Demo" id="ROt-d1-jtv">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="I5U-7x-sIJ"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7k-HR-Yc2">
                                 <frame key="frameInset" minX="108" minY="263" width="159" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="SCAN"/>
                                 <connections>
                                     <action selector="scanDevices:" destination="3i0-m3-Tau" eventType="touchUpInside" id="tCh-Id-9YE"/>
+                                    <segue destination="lf9-dP-iPv" kind="show" id="yky-0s-8TE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="1Ft-ge-eEZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUO-PE-zGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2698" y="-215"/>
+            <point key="canvasLocation" x="3735" y="-223"/>
         </scene>
         <!--Graph Collection View Controller-->
         <scene sceneID="HMd-zd-L5L">
@@ -311,6 +304,22 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </view>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tempGraph" id="S1R-uu-sP9">
+                                <rect key="frame" x="130" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="volumeGraph" id="GxG-qe-dxt">
+                                <rect key="frame" x="195" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="lf9-dP-iPv" id="IIu-0p-3fj"/>
@@ -321,25 +330,25 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eei-Q2-A5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4968.8000000000002" y="-330.58470764617692"/>
+            <point key="canvasLocation" x="4433" y="-223"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="IGV-vM-awR">
+        <scene sceneID="3J2-J4-Ukv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CHa-UO-EGA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YPd-h7-Nmz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dse-JQ-bWR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z1e-wn-2Jr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="lf9-dP-iPv" kind="relationship" relationship="rootViewController" id="0AR-Xx-WV8"/>
+                        <segue destination="3i0-m3-Tau" kind="relationship" relationship="rootViewController" id="I24-Qw-Cm6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l3S-fN-emk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KDw-L9-PWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4029.5999999999999" y="-330.58470764617692"/>
+            <point key="canvasLocation" x="2854" y="-222"/>
         </scene>
     </scenes>
     <resources>
