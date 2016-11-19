@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */; };
 		C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */; };
 		C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7AB1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework */; };
 		C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */; };
@@ -23,8 +24,8 @@
 		C5CD0EED1DA024B700B1355D /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */; };
 		C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */; };
 		C5CD0EF51DA14AF700B1355D /* e4.png in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0EF41DA14AF700B1355D /* e4.png */; };
-		C5DCE0A71DBC729B007AC5C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; };
-		C5DCE0A81DBC729B007AC5C6 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5DCE0A71DBC729B007AC5C6 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; };
+		C5DCE0A81DBC729B007AC5C6 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +66,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C5DCE0A81DBC729B007AC5C6 /* Charts.framework in Embed Frameworks */,
+				C5DCE0A81DBC729B007AC5C6 /* ReferenceProxy in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sono.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewController.swift; sourceTree = "<group>"; };
 		C522A7AA1DB41E81003D5913 /* EmpaticaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmpaticaBridge.h; sourceTree = "<group>"; };
 		C522A7AB1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EmpaLink-ios-0.7-full.framework"; path = "/Users/Amr/Developer/iOS/Sono/EmpaLink-ios-0.7-full.framework"; sourceTree = "<absolute>"; };
@@ -93,6 +95,8 @@
 		C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		C5CD0EF41DA14AF700B1355D /* e4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e4.png; sourceTree = "<group>"; };
 		C5DCE09B1DBC6FF4007AC5C6 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = SOURCE_ROOT; };
+		CEAADB62BEBD15358886EC17 /* Pods-Sono.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sono.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sono/Pods-Sono.debug.xcconfig"; sourceTree = "<group>"; };
+		D73012B1F9AABF420DD05FE9 /* Pods-Sono.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sono.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sono/Pods-Sono.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5DCE0A71DBC729B007AC5C6 /* Charts.framework in Frameworks */,
+				C5DCE0A71DBC729B007AC5C6 /* ReferenceProxy in Frameworks */,
 				C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
 				C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
+				9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */,
+				1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,6 +129,7 @@
 				C54372C11DA01BB900BBCD87 /* Sono */,
 				C54372C01DA01BB900BBCD87 /* Products */,
 				C522A7A91DB4188F003D5913 /* Frameworks */,
+				ED3494B36284C98C8063C0F0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +183,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		ED3494B36284C98C8063C0F0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CEAADB62BEBD15358886EC17 /* Pods-Sono.debug.xcconfig */,
+				D73012B1F9AABF420DD05FE9 /* Pods-Sono.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,10 +199,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C54372D11DA01BB900BBCD87 /* Build configuration list for PBXNativeTarget "Sono" */;
 			buildPhases = (
+				D1F3B1726DFE36BE3FCF93C6 /* [CP] Check Pods Manifest.lock */,
 				C54372BB1DA01BB900BBCD87 /* Sources */,
 				C54372BC1DA01BB900BBCD87 /* Frameworks */,
 				C54372BD1DA01BB900BBCD87 /* Resources */,
 				C5DCE08A1DBC6CEF007AC5C6 /* Embed Frameworks */,
+				599E562E1E11A1263E52FA70 /* [CP] Embed Pods Frameworks */,
+				FAEF9D353E7868405C92B3B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -283,6 +302,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		599E562E1E11A1263E52FA70 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sono/Pods-Sono-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1F3B1726DFE36BE3FCF93C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FAEF9D353E7868405C92B3B5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sono/Pods-Sono-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C54372BB1DA01BB900BBCD87 /* Sources */ = {
@@ -425,6 +492,7 @@
 		};
 		C54372D21DA01BB900BBCD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEAADB62BEBD15358886EC17 /* Pods-Sono.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -438,13 +506,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Sono/EmpaticaBridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		C54372D31DA01BB900BBCD87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D73012B1F9AABF420DD05FE9 /* Pods-Sono.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -458,7 +527,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Sono/EmpaticaBridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
