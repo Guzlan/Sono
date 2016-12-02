@@ -18,11 +18,15 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     @IBAction func uploadButton(_ sender: Any) {
             performSegue(withIdentifier: "UploadSegue", sender: sender)
     }
+    
+    var timer : Timer?
+    
     var tempReading : String?
     var gsrReading : String?
     var hrReading: String?
     var ibiReading: String?
     var bvpReading: String?
+    
     
     var tempCounter = 0
     var gsrCounter = 0
@@ -30,14 +34,20 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var ibiCounter = 0
     var bvpCounter = 0
     
+    
+    var updatedSecond : Double = 0.0
+    var lastBVPReading : Float = 0.0
+    var lastGSRReading : Float = 0.0
+    
+    
     var connectedE4  : EmpaticaDeviceManager?
     var graphs = [LineChartView]() // an array to store our graphs
     let noGraphDataMessages = ["No EA data", "No blood volume data", "No heart rate data", "No temperature data","No inter beat interval data"] //ORDER CHANGES HERE
-    let tempGraph  = LineChartView() //our temperature graph
+    //let tempGraph  = LineChartView() //our temperature graph
     let volumeGraph = LineChartView() //our volume graph
     let eaGraph = LineChartView() //our volume graph
-    let heartRateGraph = LineChartView() //our volume graph
-    let ibiGraph = LineChartView() //our volume graph
+    //let heartRateGraph = LineChartView() //our volume graph
+    //let ibiGraph = LineChartView() //our volume graph
     var gradients = [CAGradientLayer]()
     
     let bvpQueue  = DispatchQueue(label: "bvp", qos: .userInitiated)
@@ -63,12 +73,14 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         ibiReading = ("Time Stamp,IBI\n")
         bvpReading = ("Time Stamp,BVP\n")
         
+        //timer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(updateGraphs), userInfo: nil, repeats: true)
+        
         //ORDER CHANGES HERE
-        graphs.append(tempGraph) // add temperature graph to our graphs list
+        //graphs.append(tempGraph) // add temperature graph to our graphs list
         graphs.append(volumeGraph)// add volume graph to our graphs list
         graphs.append(eaGraph) // add the electrodermal activity graph
-        graphs.append(heartRateGraph) // add the heart rate graph
-        graphs.append(ibiGraph) // add the inter beat interval graph
+       // graphs.append(heartRateGraph) // add the heart rate graph
+       // graphs.append(ibiGraph) // add the inter beat interval graph
         setUp(graphs: graphs)
         setUpGradientBackground()
         connectedE4?.connect(with: self)
@@ -94,7 +106,15 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             graphs[i].xAxis.labelPosition = .bottom
             graphs[i].animate(xAxisDuration: 2.0)
             graphs[i].animate(yAxisDuration: 2.0)
-            setChartData(forChart: graphs[i], withNumber: 0)
+            graphs[i].zoom(scaleX: CGFloat(1.0), scaleY: CGFloat(1.0), xValue: 0, yValue: Double(0), axis: .left)
+            if i == 0 {
+                graphs[i].leftAxis.axisMinimum = -100.00
+                graphs[i].leftAxis.axisMaximum = 100.00
+            }else{
+                graphs[i].leftAxis.axisMinimum = 0.00
+                graphs[i].leftAxis.axisMaximum = 0.50
+            }
+            setChartData(forChart: graphs[i], withNumber: i)
         }
         
     }
@@ -128,7 +148,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func setChartData(forChart chart: LineChartView, withNumber num : Int){
 //        chart.xAxis.labelPosition = .bottom
         var entries = [ChartDataEntry]()
-        entries.append(ChartDataEntry(x:0, y:0))
+        entries.append(ChartDataEntry(x: -1, y: 0))
 //        for i in 0..<months.count{
 //            entries.append(ChartDataEntry(x: Double(i), y: dollars1[i]))
 //        }
@@ -150,6 +170,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         set.lineWidth = 1.5
         set.drawCirclesEnabled = false
         set.drawValuesEnabled = false
+        set.mode  = .cubicBezier
+        if num == 1 {
+            set.drawFilledEnabled = true
+        }
         //set.circleRadius = 4.0 // the radius of the node circle
         //set.fillAlpha = 65 / 255.0
         //set.fillColor = UIColor.orange
@@ -224,13 +248,18 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         bvpQueue.async { [unowned self] in
             self.bvpReading?.append("\(self.bvpCounter),\(bvp) \n")
             self.bvpCounter += 1
+            //self.lastBVPReading = bvp
+            self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp, andValue: bvp)
         }
+        
        
     }
     func didReceiveGSR(_ gsr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         gsrQueue.async {[unowned self] in
             self.gsrReading?.append("\(self.gsrCounter),\(gsr)\n")
             self.gsrCounter += 1
+            self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp, andValue: gsr)
+            //self.lastGSRReading = gsr
         }
        
     }
@@ -238,6 +267,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         ibiQueue.async {[unowned self] in
             self.ibiReading?.append("\(self.ibiCounter),\(ibi)\n")
             self.ibiCounter += 1
+            
         }
        
         
@@ -256,19 +286,26 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         
     }
+    func updateGraphs(){
+        
+        //updateEntry(forGraph: graphs[0], withTimestamp: updatedSecond, andValue: Float(lastGSRReading))
+        //updateEntry(forGraph: graphs[1], withTimestamp: updatedSecond, andValue: Float(lastBVPReading))
+    }
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
             DispatchQueue.main.async(execute:{
                 
-//                let graphData = graph.lineData
-//                let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
-//                graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
-//                graphData?.notifyDataChanged()
-//                graphDataSet.notifyDataSetChanged()
-//                graph.notifyDataSetChanged()
-//                graph.setVisibleXRangeMaximum(10)
-////                //            graph.setNeedsLayout()
-////                //            graph.setNeedsDisplay()
-//                graph.moveViewToX(timestamp)
+                let graphData = graph.lineData
+                let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
+                graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
+                graphData?.notifyDataChanged()
+                graphDataSet.notifyDataSetChanged()
+                graph.notifyDataSetChanged()
+                graph.setVisibleXRangeMaximum(10)
+//                //            graph.setNeedsLayout()
+//                //            graph.setNeedsDisplay()
+                graph.moveViewToX(timestamp)
+            
+
             })
         //graph.zoom(scaleX: CGFloat(1.0), scaleY: CGFloat(1.0), xValue: timestamp, yValue: Double(value), axis: graphDataSet.axisDependency)
         //        graph.setVisibleYRangeMaximum(Double(value), axis: .left)
@@ -276,7 +313,8 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         
     }
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.isToolbarHidden = true 
+        self.navigationController?.isToolbarHidden = true
+        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "UploadSegue"{
