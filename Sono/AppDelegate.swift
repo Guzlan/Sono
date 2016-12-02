@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import
+import SwiftyDropbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,9 +18,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //
+        DropboxClientsManager.setupWithAppKey("gwy832i7oai0wix")
+        var connectedToEmpatica = false
         EmpaticaAPI.authenticate(withAPIKey:"1d6e511c753f4f8f8d6f8ea7a672839c") { (success : Bool, description: String?) in
             if description != nil{
                 print("connected to the API: \(success)")
+                connectedToEmpatica = true
+            }
+            connectedToEmpatica = false
+        }
+        return connectedToEmpatica
+        
+    }
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if let authResult = DropboxClientsManager.handleRedirectURL(url) {
+            switch authResult {
+            case .success:
+                print("Success! User is logged into Dropbox.")
+            case .cancel:
+                print("Authorization flow was manually canceled by user!")
+            case .error(_, let description):
+                print("Error: \(description)")
             }
         }
         return true

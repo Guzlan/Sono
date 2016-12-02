@@ -24,8 +24,10 @@
 		C5CD0EED1DA024B700B1355D /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */; };
 		C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */; };
 		C5CD0EF51DA14AF700B1355D /* e4.png in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0EF41DA14AF700B1355D /* e4.png */; };
-		C5DCE0A71DBC729B007AC5C6 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; };
-		C5DCE0A81DBC729B007AC5C6 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5DCE0A71DBC729B007AC5C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; };
+		C5DCE0A81DBC729B007AC5C6 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5DCE0A21DBC6FF4007AC5C6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5E795CB1DEFA54900C00472 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E795CA1DEFA54900C00472 /* UploadViewController.swift */; };
+		C5E795CD1DEFB07600C00472 /* dropboxLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = C5E795CC1DEFB07600C00472 /* dropboxLogo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +68,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C5DCE0A81DBC729B007AC5C6 /* ReferenceProxy in Embed Frameworks */,
+				C5DCE0A81DBC729B007AC5C6 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +97,8 @@
 		C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		C5CD0EF41DA14AF700B1355D /* e4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e4.png; sourceTree = "<group>"; };
 		C5DCE09B1DBC6FF4007AC5C6 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = SOURCE_ROOT; };
+		C5E795CA1DEFA54900C00472 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		C5E795CC1DEFB07600C00472 /* dropboxLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropboxLogo.png; sourceTree = "<group>"; };
 		CEAADB62BEBD15358886EC17 /* Pods-Sono.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sono.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sono/Pods-Sono.debug.xcconfig"; sourceTree = "<group>"; };
 		D73012B1F9AABF420DD05FE9 /* Pods-Sono.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sono.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sono/Pods-Sono.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5DCE0A71DBC729B007AC5C6 /* ReferenceProxy in Frameworks */,
+				C5DCE0A71DBC729B007AC5C6 /* Charts.framework in Frameworks */,
 				C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
 				C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
 				9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */,
@@ -151,6 +155,7 @@
 				C54372C41DA01BB900BBCD87 /* ViewController.swift */,
 				C54372C61DA01BB900BBCD87 /* Main.storyboard */,
 				C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */,
+				C5E795CA1DEFA54900C00472 /* UploadViewController.swift */,
 				C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */,
 				C587FF141DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift */,
 				C587FF161DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift */,
@@ -166,6 +171,7 @@
 		C5CD0EF61DA14B0D00B1355D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C5E795CC1DEFB07600C00472 /* dropboxLogo.png */,
 				C57941E71DA3F286002FE927 /* heart-7.png */,
 				C5CD0EF41DA14AF700B1355D /* e4.png */,
 				C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */,
@@ -292,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5E795CD1DEFB07600C00472 /* dropboxLogo.png in Resources */,
 				C57941EA1DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg in Resources */,
 				C54372CD1DA01BB900BBCD87 /* LaunchScreen.storyboard in Resources */,
 				C57941E81DA3F286002FE927 /* heart-7.png in Resources */,
@@ -331,7 +338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FAEF9D353E7868405C92B3B5 /* [CP] Copy Pods Resources */ = {
@@ -360,6 +367,7 @@
 				C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */,
 				C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */,
 				C587FF171DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift in Sources */,
+				C5E795CB1DEFA54900C00472 /* UploadViewController.swift in Sources */,
 				C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */,
 				C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */,
 				C587FF151DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift in Sources */,
@@ -506,7 +514,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Sono/EmpaticaBridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -527,7 +535,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail-guzlan.amro.Sono";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Sono/EmpaticaBridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
