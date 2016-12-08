@@ -56,6 +56,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     let hrQueue  = DispatchQueue(label: "hr", qos: .userInitiated)
     let gsrQueue  = DispatchQueue(label: "gsr", qos: .userInitiated)
     
+    @IBAction func newSessionButton(_ sender: AnyObject) {
+        startNewSession()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        startNewSession()
+    }
     
     
     //The following are dummy variables....MAHMOUD remove them and put your logic variables instead
@@ -85,6 +92,21 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setUpGradientBackground()
         connectedE4?.connect(with: self)
     }
+    
+    
+    func startNewSession() {
+        self.tempReading = ""
+        self.gsrReading = ""
+        self.hrReading = ""
+        self.ibiReading = ""
+        self.bvpReading = ""
+        tempCounter = 0
+        gsrCounter = 0
+        hrCounter = 0
+        ibiCounter = 0
+        bvpCounter = 0
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
              self.navigationController?.isToolbarHidden = false
              connectedE4?.connect(with: self)
@@ -319,7 +341,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "UploadSegue"{
             let destinationVC = segue.destination as! UploadViewController
-            connectedE4?.disconnect()
+            //connectedE4?.disconnect()     //Do not disconnect because it's an overhead to reconnect
             destinationVC.bvpReading = bvpReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
             destinationVC.tempReading = tempReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
             destinationVC.ibiReading = ibiReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)

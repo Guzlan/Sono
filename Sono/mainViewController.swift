@@ -12,15 +12,19 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     var settingsBarButton : UIBarButtonItem?
     var device : EmpaticaDeviceManager?
     
+    @IBOutlet weak var scanStatusLabel: UILabel!
+    
     @IBAction func scanDevices(_ sender: UIButton) {
         print("Started scanning for E4's...")
-       
+        scanStatusLabel.text = "Scanning..."
+        scanStatusLabel.textColor = UIColor.black
         EmpaticaAPI.discoverDevices(with: self)
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scanStatusLabel.text = ""
         
         // Do any additional setup after loading the view.
     }
@@ -29,8 +33,15 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
         // Dispose of any resources that can be recreated.
     }
     func didDiscoverDevices(_ devices: [Any]!) {
+        if device?.deviceStatus != nil {
+            if device?.deviceStatus == kDeviceStatusConnected {
+                performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
+            }
+        }
         if devices.count > 0 {
             print("I was able to find \(devices.count)")
+            scanStatusLabel.text = "Success detecting Device"
+            scanStatusLabel.textColor = UIColor.green
             if let foundDevice =  (devices[0] as? EmpaticaDeviceManager){
                 device = foundDevice
                 performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
@@ -38,12 +49,16 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
         }
         else{
             print("I was not able to find devices")
+            scanStatusLabel.text = "Failed To Detect Device"
+            scanStatusLabel.textColor = UIColor.red
         }
     }
     func didUpdate(_ status: BLEStatus) {
         switch status {
         case kBLEStatusNotAvailable:
             print("TURN ON YOUR BLUETOOTH YOU DICK!")
+            scanStatusLabel.text = "I think your Bluetooth might be off"
+            scanStatusLabel.textColor = UIColor.black
         case kBLEStatusReady:
             print("Finished scanning")
         case kBLEStatusScanning:
