@@ -14,11 +14,6 @@ private let informationCellIdentifier = "InformationCell"
 
 class GraphCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, EmpaticaDeviceDelegate{
     
-
-    @IBAction func uploadButton(_ sender: Any) {
-            performSegue(withIdentifier: "UploadSegue", sender: sender)
-    }
-    
     var timer : Timer?
     
     var tempReading : String?
@@ -43,11 +38,8 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var connectedE4  : EmpaticaDeviceManager?
     var graphs = [LineChartView]() // an array to store our graphs
     let noGraphDataMessages = ["No EA data", "No blood volume data", "No heart rate data", "No temperature data","No inter beat interval data"] //ORDER CHANGES HERE
-    //let tempGraph  = LineChartView() //our temperature graph
     let volumeGraph = LineChartView() //our volume graph
     let eaGraph = LineChartView() //our volume graph
-    //let heartRateGraph = LineChartView() //our volume graph
-    //let ibiGraph = LineChartView() //our volume graph
     var gradients = [CAGradientLayer]()
     
     let bvpQueue  = DispatchQueue(label: "bvp", qos: .userInitiated)
@@ -56,38 +48,28 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     let hrQueue  = DispatchQueue(label: "hr", qos: .userInitiated)
     let gsrQueue  = DispatchQueue(label: "gsr", qos: .userInitiated)
     
-    @IBAction func newSessionButton(_ sender: AnyObject) {
-        startNewSession()
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         startNewSession()
     }
     
     
-    //The following are dummy variables....MAHMOUD remove them and put your logic variables instead
-//    let y =
-//    let dollars1 =
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Graphs" // title of the navigation controller page
+        setBackgroundColor()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: grapCellIdentifier) // register the reusable cell we have
-        self.collectionView!.backgroundColor = UIColor(colorLiteralRed: 0.251, green: 0.251, blue: 0.251, alpha: 1.00)
-        self.collectionView!.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 20
+        layout.minimumLineSpacing = 20
+        self.collectionView!.collectionViewLayout = layout
         tempReading = ("Time Stamp,Temperature\n")
         gsrReading = ("Time Stamp,Response\n")
         hrReading = ("Time Stamp, Heart Rate\n")
         ibiReading = ("Time Stamp,IBI\n")
         bvpReading = ("Time Stamp,BVP\n")
-        
-        //timer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(updateGraphs), userInfo: nil, repeats: true)
-        
-        //ORDER CHANGES HERE
-        //graphs.append(tempGraph) // add temperature graph to our graphs list
         graphs.append(volumeGraph)// add volume graph to our graphs list
         graphs.append(eaGraph) // add the electrodermal activity graph
-       // graphs.append(heartRateGraph) // add the heart rate graph
-       // graphs.append(ibiGraph) // add the inter beat interval graph
         setUp(graphs: graphs)
         setUpGradientBackground()
         connectedE4?.connect(with: self)
@@ -108,8 +90,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
-             self.navigationController?.isToolbarHidden = false
-             connectedE4?.connect(with: self)
+        connectedE4?.connect(with: self)
     }
     //
     //
@@ -117,11 +98,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     //
     
     func setUp(graphs: [LineChartView]){
-        
         for i in 0..<graphs.count{
-//            graphs[i].layer.borderWidth = 1
-//            graphs[i].layer.borderColor = UIColor.white.cgColor
             graphs[i].layer.cornerRadius = 10
+            graphs[i].layer.borderColor = UIColor.black.cgColor
+            graphs[i].layer.borderWidth = 0.5
             graphs[i].clipsToBounds = true
             graphs[i].noDataText = self.noGraphDataMessages[i]
             graphs[i].translatesAutoresizingMaskIntoConstraints = false
@@ -142,39 +122,59 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 2
+        
+        if section == 0{
+            return 1
+        }else if section == 1{
+            return 2
+        }
+        else {
+            return 1
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row < 2{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GraphCell", for: indexPath)
-            
-            cell.addSubview(graphs[indexPath.row]) //ORDER CHANGES HERE
-            // add constraints on the graph view inside it's cell. 0 padding from all sides
-            cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
-            cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
-            gradients[indexPath.row].frame = cell.layer.bounds //ORDER CHANGES HERE
-            cell.layer.insertSublayer(gradients[indexPath.row], at: 0)
-            return cell
-        }else {
+        
+        if indexPath.section == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
+            cell.layer.cornerRadius = 10
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 0.5
             return cell
         }
+        else if indexPath.section == 1{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GraphCell", for: indexPath)
+                
+                cell.addSubview(graphs[indexPath.row]) //ORDER CHANGES HERE
+                // add constraints on the graph view inside it's cell. 0 padding from all sides
+                cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
+                cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
+                gradients[indexPath.row].frame = cell.layer.bounds //ORDER CHANGES HERE
+                cell.layer.insertSublayer(gradients[indexPath.row], at: 0)
+                return cell
+        }
+        else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
+                cell.layer.cornerRadius = 10
+                cell.layer.borderColor = UIColor.black.cgColor
+                cell.layer.borderWidth = 0.5
+                return cell
+        }
+        
     }
     
     
     func setChartData(forChart chart: LineChartView, withNumber num : Int){
-//        chart.xAxis.labelPosition = .bottom
+        //        chart.xAxis.labelPosition = .bottom
         var entries = [ChartDataEntry]()
         entries.append(ChartDataEntry(x: -1, y: 0))
-//        for i in 0..<months.count{
-//            entries.append(ChartDataEntry(x: Double(i), y: dollars1[i]))
-//        }
-//        
+        //        for i in 0..<months.count{
+        //            entries.append(ChartDataEntry(x: Double(i), y: dollars1[i]))
+        //        }
+        //
         let set = LineChartDataSet()
         set.values = entries
         
@@ -196,11 +196,6 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         if num == 1 {
             set.drawFilledEnabled = true
         }
-        //set.circleRadius = 4.0 // the radius of the node circle
-        //set.fillAlpha = 65 / 255.0
-        //set.fillColor = UIColor.orange
-        //set.highlightColor = UIColor.white
-        //set.drawCircleHoleEnabled = true
         var dataSets  = [LineChartDataSet]()
         dataSets.append(set)
         let data = LineChartData(dataSets: dataSets)
@@ -223,7 +218,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         heartRateGradient.colors = [ UIColor(colorLiteralRed: 0.333 , green: 0.906, blue: 0.800, alpha: 1.00).cgColor, UIColor(colorLiteralRed: 0.235, green: 0.675, blue: 0.851, alpha: 1.00).cgColor]
         let ibiGradient = CAGradientLayer()
         ibiGradient.cornerRadius = 10
-    
+        
         ibiGradient.colors = [ UIColor(colorLiteralRed: 0.992, green: 0.773, blue: 0.184, alpha: 1.00).cgColor, UIColor(colorLiteralRed: 0.992, green: 0.635, blue: 0.157, alpha: 1.00).cgColor]
         let volume = CAGradientLayer()
         volume.cornerRadius = 10
@@ -238,13 +233,14 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row < 2{
+        if indexPath.section == 1{
             return CGSize(width: self.view.frame.width-5, height: (self.collectionView?.window?.frame.height)!*0.3)
-        }else {
-            return CGSize(width: self.view.frame.width, height: 100)
+        }else{
+
+            return CGSize(width: self.view.frame.width-5, height:  (self.collectionView?.window?.frame.height)!*0.1)
         }
     }
-
+    
     func didUpdate(_ status: DeviceStatus, forDevice device: EmpaticaDeviceManager!) {
         switch status{
         case kDeviceStatusDisconnected:
@@ -262,36 +258,31 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             
         }
     }
-//    func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
-//        updateEntry(forGraph: graphs[0], withTimestamp: timestamp, andValue: temp)
-//        //print("time stamp \(timestamp) temp \(temp)")
-//    }
     func didReceiveBVP(_ bvp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         bvpQueue.async { [unowned self] in
             self.bvpReading?.append("\(self.bvpCounter),\(bvp) \n")
             self.bvpCounter += 1
-            //self.lastBVPReading = bvp
             self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp, andValue: bvp)
         }
         
-       
+        
     }
     func didReceiveGSR(_ gsr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         gsrQueue.async {[unowned self] in
             self.gsrReading?.append("\(self.gsrCounter),\(gsr)\n")
             self.gsrCounter += 1
             self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp, andValue: gsr)
-            //self.lastGSRReading = gsr
         }
-       
+        
     }
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
             self.ibiReading?.append("\(self.ibiCounter),\(ibi)\n")
             self.ibiCounter += 1
+            print("\"Time is \(timestamp)\",",terminator:"")
             
         }
-       
+        
         
     }
     func didReceiveHR(_ hr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
@@ -303,51 +294,36 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         tempQueue.async {[unowned self] in
-           self.tempReading?.append("\(self.tempCounter),\(temp)\n")
+            self.tempReading?.append("\(self.tempCounter),\(temp)\n")
             self.tempCounter += 1
         }
         
     }
-    func updateGraphs(){
-        
-        //updateEntry(forGraph: graphs[0], withTimestamp: updatedSecond, andValue: Float(lastGSRReading))
-        //updateEntry(forGraph: graphs[1], withTimestamp: updatedSecond, andValue: Float(lastBVPReading))
+    func setBackgroundColor(){
+        let bc = CAGradientLayer()
+        let topColor = UIColor(colorLiteralRed: 0.325, green: 0.824, blue: 0.675, alpha: 1.00).cgColor
+        let bottomColor = UIColor(colorLiteralRed: 0.129, green: 0.412, blue: 0.647, alpha: 1.00).cgColor
+        bc.colors = [topColor, bottomColor]
+        bc.locations = [0.0, 1.0]
+        bc.frame = self.view.bounds
+        bc.zPosition = -1
+        self.collectionView?.layer.insertSublayer(bc, at: 0)
     }
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
-            DispatchQueue.main.async(execute:{
-                
-                let graphData = graph.lineData
-                let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
-                graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
-                graphData?.notifyDataChanged()
-                graphDataSet.notifyDataSetChanged()
-                graph.notifyDataSetChanged()
-                graph.setVisibleXRangeMaximum(10)
-//                //            graph.setNeedsLayout()
-//                //            graph.setNeedsDisplay()
-                graph.moveViewToX(timestamp)
+        DispatchQueue.main.async(execute:{
+            let graphData = graph.lineData
+            let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
+            graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
+            graphData?.notifyDataChanged()
+            graphDataSet.notifyDataSetChanged()
+            graph.notifyDataSetChanged()
+            graph.setVisibleXRangeMaximum(10)
+            graph.moveViewToX(timestamp)
             
-
-            })
-        //graph.zoom(scaleX: CGFloat(1.0), scaleY: CGFloat(1.0), xValue: timestamp, yValue: Double(value), axis: graphDataSet.axisDependency)
-        //        graph.setVisibleYRangeMaximum(Double(value), axis: .left)
-        //        graph.setVisibleYRangeMinimum(-1*Double(value), axis: .left)
-        
+            
+        })
     }
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.isToolbarHidden = true
         
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "UploadSegue"{
-            let destinationVC = segue.destination as! UploadViewController
-            //connectedE4?.disconnect()     //Do not disconnect because it's an overhead to reconnect
-            destinationVC.bvpReading = bvpReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            destinationVC.tempReading = tempReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            destinationVC.ibiReading = ibiReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            destinationVC.gsrReading = gsrReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            destinationVC.hrReading = hrReading?.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            
-        }
     }
 }

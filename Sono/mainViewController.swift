@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import DeviceKit
 
 class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDelegate{
     var settingsBarButton : UIBarButtonItem?
     var device : EmpaticaDeviceManager?
+    var segueDestination : String?
     
     @IBOutlet weak var scanStatusLabel: UILabel!
     
@@ -24,9 +26,21 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackgroundColor()
         scanStatusLabel.text = ""
-        
-        // Do any additional setup after loading the view.
+        let iOSDevice = Device()
+        switch iOSDevice{
+        case .iPhone6sPlus:
+            print("This is a 6s plus")
+        case .iPhone6:
+            print("This is a 6")
+        case .iPhone5c:
+            print("this is a 5c")
+        case .iPhone4:
+            print("This is a 4")
+        default:
+            print("Not really sure what iOS device this is")
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,14 +81,23 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
             print ("No idea about the status")
         }
     }
+    func setBackgroundColor(){
+        let bc = CAGradientLayer()
+        let topColor = UIColor(colorLiteralRed: 0.325, green: 0.824, blue: 0.675, alpha: 1.00).cgColor
+        let bottomColor = UIColor(colorLiteralRed: 0.129, green: 0.412, blue: 0.647, alpha: 1.00).cgColor
+        bc.colors = [topColor, bottomColor]
+        bc.locations = [0.0, 1.0]
+        bc.frame = self.view.bounds
+        self.view.layer.insertSublayer(bc, at: 0)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "displayGraphsSegue"{
-            let destinationVC = segue.destination as! GraphCollectionViewController
-               destinationVC.connectedE4 = device
-            
+            let destinationVC = segue.destination as! UITabBarController
+             let viewControllersManaged = destinationVC.viewControllers
+             let mainDestinationVc = viewControllersManaged?[0] as! GraphCollectionViewController
+             mainDestinationVc.connectedE4 = device
         }
     }
-//    func didReceiveAccelerationX(_ x: Int8, y: Int8, z: Int8, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
-//        print("(\(x),\(y),\(z))")
-//    }
+
 }

@@ -18,6 +18,7 @@
 		C54372CD1DA01BB900BBCD87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54372CB1DA01BB900BBCD87 /* LaunchScreen.storyboard */; };
 		C57941E81DA3F286002FE927 /* heart-7.png in Resources */ = {isa = PBXBuildFile; fileRef = C57941E71DA3F286002FE927 /* heart-7.png */; };
 		C57941EA1DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */; };
+		C580F09C1E74948F000E368F /* BiomusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C580F09B1E74948E000E368F /* BiomusicController.swift */; };
 		C587FF151DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587FF141DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift */; };
 		C587FF171DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587FF161DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift */; };
 		C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */; };
@@ -90,6 +91,7 @@
 		C54372CE1DA01BB900BBCD87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C57941E71DA3F286002FE927 /* heart-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-7.png"; sourceTree = "<group>"; };
 		C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "heart-rate-graph-big-red-35515205.jpg"; sourceTree = "<group>"; };
+		C580F09B1E74948E000E368F /* BiomusicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiomusicController.swift; sourceTree = "<group>"; };
 		C587FF141DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		C587FF161DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				C5CD0EF61DA14B0D00B1355D /* images */,
 				C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */,
+				C580F09B1E74948E000E368F /* BiomusicController.swift */,
 				C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */,
 				C54372C21DA01BB900BBCD87 /* AppDelegate.swift */,
 				C54372C41DA01BB900BBCD87 /* ViewController.swift */,
@@ -235,7 +238,7 @@
 				TargetAttributes = {
 					C54372BE1DA01BB900BBCD87 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = UT6TK6B6QY;
+						DevelopmentTeam = 8ZK23DRA3H;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -367,6 +370,7 @@
 				C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */,
 				C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */,
 				C587FF171DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift in Sources */,
+				C580F09C1E74948F000E368F /* BiomusicController.swift in Sources */,
 				C5E795CB1DEFA54900C00472 /* UploadViewController.swift in Sources */,
 				C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */,
 				C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */,
@@ -504,7 +508,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UT6TK6B6QY;
+				DEVELOPMENT_TEAM = 8ZK23DRA3H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -512,7 +516,7 @@
 				INFOPLIST_FILE = Sono/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zeyad.saleh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.guzlan.amro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
@@ -525,7 +529,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UT6TK6B6QY;
+				DEVELOPMENT_TEAM = 8ZK23DRA3H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -533,7 +537,7 @@
 				INFOPLIST_FILE = Sono/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zeyad.saleh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.guzlan.amro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;

@@ -7,6 +7,7 @@ target 'Sono' do
 
   # Pods for Sono
  pod 'SwiftyDropbox'
+ pod 'DeviceKit', '~> 1.0'
 
 
 end
