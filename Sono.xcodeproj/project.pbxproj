@@ -18,9 +18,9 @@
 		C54372CD1DA01BB900BBCD87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54372CB1DA01BB900BBCD87 /* LaunchScreen.storyboard */; };
 		C57941E81DA3F286002FE927 /* heart-7.png in Resources */ = {isa = PBXBuildFile; fileRef = C57941E71DA3F286002FE927 /* heart-7.png */; };
 		C57941EA1DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */; };
-		C580F09C1E74948F000E368F /* BiomusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C580F09B1E74948E000E368F /* BiomusicController.swift */; };
 		C587FF151DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587FF141DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift */; };
 		C587FF171DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587FF161DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift */; };
+		C59EB92F1E750023000A51F1 /* Biomusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59EB92E1E750023000A51F1 /* Biomusic.swift */; };
 		C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */; };
 		C5CD0EED1DA024B700B1355D /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */; };
 		C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */; };
@@ -91,9 +91,9 @@
 		C54372CE1DA01BB900BBCD87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C57941E71DA3F286002FE927 /* heart-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-7.png"; sourceTree = "<group>"; };
 		C57941E91DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "heart-rate-graph-big-red-35515205.jpg"; sourceTree = "<group>"; };
-		C580F09B1E74948E000E368F /* BiomusicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiomusicController.swift; sourceTree = "<group>"; };
 		C587FF141DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		C587FF161DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationCollectionViewCell.swift; sourceTree = "<group>"; };
+		C59EB92E1E750023000A51F1 /* Biomusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Biomusic.swift; sourceTree = "<group>"; };
 		C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
 		C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
@@ -152,11 +152,11 @@
 			children = (
 				C5CD0EF61DA14B0D00B1355D /* images */,
 				C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */,
-				C580F09B1E74948E000E368F /* BiomusicController.swift */,
 				C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */,
 				C54372C21DA01BB900BBCD87 /* AppDelegate.swift */,
 				C54372C41DA01BB900BBCD87 /* ViewController.swift */,
 				C54372C61DA01BB900BBCD87 /* Main.storyboard */,
+				C59EB92E1E750023000A51F1 /* Biomusic.swift */,
 				C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */,
 				C5E795CA1DEFA54900C00472 /* UploadViewController.swift */,
 				C5CD0EEE1DA0ABA100B1355D /* mainViewController.swift */,
@@ -370,9 +370,9 @@
 				C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */,
 				C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */,
 				C587FF171DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift in Sources */,
-				C580F09C1E74948F000E368F /* BiomusicController.swift in Sources */,
 				C5E795CB1DEFA54900C00472 /* UploadViewController.swift in Sources */,
 				C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */,
+				C59EB92F1E750023000A51F1 /* Biomusic.swift in Sources */,
 				C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */,
 				C587FF151DC26FDA00A4B5C6 /* GraphCollectionViewCell.swift in Sources */,
 				C54372C31DA01BB900BBCD87 /* AppDelegate.swift in Sources */,

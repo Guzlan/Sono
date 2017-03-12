@@ -8,6 +8,6 @@ target 'Sono' do
   # Pods for Sono
  pod 'SwiftyDropbox'
  pod 'DeviceKit', '~> 1.0'
-
-
+ pod 'Font-Awesome-Swift'
+ pod 'AudioKit', '~> 3.5'
 end

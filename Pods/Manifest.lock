@@ -1,18 +1,24 @@
 PODS:
   - Alamofire (4.0.1)
+  - AudioKit (3.5)
   - DeviceKit (1.0.0)
+  - Font-Awesome-Swift (1.5.3)
   - SwiftyDropbox (4.1.1):
     - Alamofire (~> 4.0.1)
 
 DEPENDENCIES:
+  - AudioKit (~> 3.5)
   - DeviceKit (~> 1.0)
+  - Font-Awesome-Swift
   - SwiftyDropbox
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  AudioKit: 775885f735260c25f4f2c3c0601e79ae49900831
   DeviceKit: ddead7f3a7c9603ba3a63cb748566428c38dd11f
+  Font-Awesome-Swift: 6615ee6b875d148f767ea60b5b4ff54e2ea3122e
   SwiftyDropbox: dfcd4d308d32d74729255b48833db61acdfb9c23
 
-PODFILE CHECKSUM: 8553bffeda87c937f09f0f79289570b127787f92
+PODFILE CHECKSUM: 6113f6562129c654060826ea2666bf7c4931dc10
 
 COCOAPODS: 1.1.1

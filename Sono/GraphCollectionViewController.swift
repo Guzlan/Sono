@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import Font_Awesome_Swift
 
 private let grapCellIdentifier = "GraphCell"
 private let informationCellIdentifier = "InformationCell"
@@ -16,12 +17,16 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     
     var timer : Timer?
     
+
+    
     var tempReading : String?
     var gsrReading : String?
     var hrReading: String?
     var ibiReading: String?
     var bvpReading: String?
+    var batteryReading : String?
     
+    var battery : UILabel?
     
     var tempCounter = 0
     var gsrCounter = 0
@@ -48,6 +53,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     let hrQueue  = DispatchQueue(label: "hr", qos: .userInitiated)
     let gsrQueue  = DispatchQueue(label: "gsr", qos: .userInitiated)
     
+    var slider : UISlider?
     
     override func viewDidAppear(_ animated: Bool) {
         startNewSession()
@@ -57,9 +63,11 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        batteryReading = ""
+        setupBatteryLabel()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: grapCellIdentifier) // register the reusable cell we have
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 5, bottom: 0, right: 5)
         layout.minimumInteritemSpacing = 20
         layout.minimumLineSpacing = 20
         self.collectionView!.collectionViewLayout = layout
@@ -73,6 +81,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setUp(graphs: graphs)
         setUpGradientBackground()
         connectedE4?.connect(with: self)
+        self.tabBarItem.title = "Biomusic"
     }
     
     
@@ -125,14 +134,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         return 3
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         if section == 0{
-            return 1
+            return 2
         }else if section == 1{
             return 2
         }
         else {
-            return 1
+            return 3
         }
     }
     
@@ -143,6 +151,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             cell.layer.cornerRadius = 10
             cell.layer.borderColor = UIColor.black.cgColor
             cell.layer.borderWidth = 0.5
+            cell.backgroundColor = UIColor.red
+            if indexPath.row == 1{
+                cell.layer.borderColor = UIColor.clear.cgColor
+                cell.layer.borderWidth = 0
+                cell.backgroundColor = UIColor.clear
+                cell.addSubview(battery!)
+            }
             return cell
         }
         else if indexPath.section == 1{
@@ -161,6 +176,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
                 cell.layer.cornerRadius = 10
                 cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.borderWidth = 0.5
+                cell.backgroundColor = UIColor.red
                 return cell
         }
         
@@ -235,12 +251,20 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 1{
             return CGSize(width: self.view.frame.width-5, height: (self.collectionView?.window?.frame.height)!*0.3)
-        }else{
-
-            return CGSize(width: self.view.frame.width-5, height:  (self.collectionView?.window?.frame.height)!*0.1)
+        }
+        else if indexPath.section == 2 {
+              return CGSize(width: 0.30*(self.view.frame.width)-5, height:  (self.collectionView?.window?.frame.height)!*0.1)
+        }
+        else{
+            if indexPath.row == 0 {
+                return CGSize(width: 0.60*(self.view.frame.width-5), height:  (self.collectionView?.window?.frame.height)!*0.1)
+            }
+            else {
+                return CGSize(width: 0.30*(self.view.frame.width-5), height:  (self.collectionView?.window?.frame.height)!*0.1)
+            }
+    
         }
     }
-    
     func didUpdate(_ status: DeviceStatus, forDevice device: EmpaticaDeviceManager!) {
         switch status{
         case kDeviceStatusDisconnected:
@@ -322,6 +346,14 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             
             
         })
+    }
+    func setupBatteryLabel(){
+        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: 0.15*(self.view.frame.width-5)))
+        self.battery?.font = UIFont(name: "Helvetica", size: 26)
+        self.battery?.textAlignment = .right
+        self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
+        self.battery?.setFAColor(color: UIColor.green)
+        self.battery?.textColor = UIColor.black
     }
     override func viewWillDisappear(_ animated: Bool) {
         
