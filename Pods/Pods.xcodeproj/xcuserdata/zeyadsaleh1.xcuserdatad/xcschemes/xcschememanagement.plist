@@ -11,6 +11,21 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>DeviceKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>Font-Awesome-Swift-Font-Awesome-Swift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Font-Awesome-Swift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>Pods-Sono.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -33,12 +48,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8759280EB54B132FC3636FB90B729B18</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9735AA72928D41DB06EA697E23930C72</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B74671AC4AD442223B677430EE6BBBF5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BA453546C51032641C49CACBC22725EE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EB5B1B105FBB99AA5D09FB6699898633</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB7FF2599B1B6512D59A914CD273BD87</key>
 		<dict>
 			<key>primary</key>
 			<true/>
