@@ -15,18 +15,21 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     var segueDestination : String?
     
     @IBOutlet weak var scanStatusLabel: UILabel!
+    @IBOutlet weak var senderBtn: UIButton!
     
     @IBAction func scanDevices(_ sender: UIButton) {
         print("Started scanning for E4's...")
         scanStatusLabel.text = "Scanning..."
         scanStatusLabel.textColor = UIColor.black
         EmpaticaAPI.discoverDevices(with: self)
-        
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        senderBtn.layer.borderWidth = 4
+        senderBtn.layer.borderColor = UIColor.white.cgColor
         scanStatusLabel.text = ""
         let iOSDevice = Device()
         switch iOSDevice{
@@ -70,8 +73,8 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     func didUpdate(_ status: BLEStatus) {
         switch status {
         case kBLEStatusNotAvailable:
-            print("TURN ON YOUR BLUETOOTH YOU DICK!")
-            scanStatusLabel.text = "I think your Bluetooth might be off"
+            print("TURN ON YOUR BLUETOOTH!")
+            scanStatusLabel.text = "Please turn on your Bluetooth"
             scanStatusLabel.textColor = UIColor.black
         case kBLEStatusReady:
             print("Finished scanning")
