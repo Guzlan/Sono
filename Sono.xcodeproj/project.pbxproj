@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */; };
 		C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */; };
-		C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7AB1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework */; };
 		C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */; };
 		C54372C31DA01BB900BBCD87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54372C21DA01BB900BBCD87 /* AppDelegate.swift */; };
 		C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54372C41DA01BB900BBCD87 /* ViewController.swift */; };
@@ -80,7 +79,6 @@
 		1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sono.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewController.swift; sourceTree = "<group>"; };
 		C522A7AA1DB41E81003D5913 /* EmpaticaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmpaticaBridge.h; sourceTree = "<group>"; };
-		C522A7AB1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EmpaLink-ios-0.7-full.framework"; path = "/Users/Amr/Developer/iOS/Sono/EmpaLink-ios-0.7-full.framework"; sourceTree = "<absolute>"; };
 		C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "EmpaLink-ios-0.7-full.framework"; sourceTree = "<group>"; };
 		C54372BF1DA01BB900BBCD87 /* Sono.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sono.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54372C21DA01BB900BBCD87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 			files = (
 				C5DCE0A71DBC729B007AC5C6 /* Charts.framework in Frameworks */,
 				C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
-				C522A7AC1DB43B5B003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */,
 				9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,7 +230,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Amro Gazlan";
 				TargetAttributes = {
 					C54372BE1DA01BB900BBCD87 = {
@@ -427,6 +424,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -477,6 +475,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

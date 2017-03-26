@@ -27,18 +27,18 @@ class  Biomusic {
     var linearTime: [[Double]] = [[Double]](repeating: [0.0], count: 5)
     
     let readingsNumber = 5
-    var currentReadings = 0
+    var currentTempReadings = 0
+    var currentGSRReadings = 0
     var temperatureReadings: [Double] = [0, 0, 0, 0, 0]
     var newTemperatureReading: Double = 0.0
     var GSRReadings: [Double] = [0, 0, 0, 0, 0]
     var newGSRReading: Double = 0.0
     var ibiIndex = 0
-    var ibiGSRRatio : Int = 0
     var newHRReading: Double = 0.0
     var newTimerFrequency: Double = 1.0
     
-    var deltaTemp   : Double = 0.03
-    var deltaEDA     : Double = 0.0025
+    var deltaTemp   : Double = 0.2
+    var deltaEDA     : Double = 0.05
     var baselineTemp: Double = 0
     var baselineEDA : Double = 0
     var currentTemp : Double = 36.4
@@ -50,245 +50,6 @@ class  Biomusic {
     var majorScale = [0,2,4,5,7,9,11]
     var scaleIndex = 0
     
-    
-    var allIBIReadings: [Double] = [0.828163, 0.781286, 0.843789, 0.859414, 0.65628, 0.640654, 0.687531, 0.796911, 0.640654]
-    
-    var allGSRReadings: [Double] = [0.0781471,
-                                    0.0755849,
-                                    0.076866,
-                                    0.0755849,
-                                    0.0755849,
-                                    0.076866,
-                                    0.076866,
-                                    0.0755849,
-                                    0.076866,
-                                    0.0755849,
-                                    0.076866,
-                                    0.0781471,
-                                    0.0755849,
-                                    0.0781471,
-                                    0.076866,
-                                    0.076866,
-                                    0.076866,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0794282,
-                                    0.0781471,
-                                    0.0794282,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0794282,
-                                    0.0794282,
-                                    0.0781471,
-                                    0.076866,
-                                    0.0794282,
-                                    0.0781471,
-                                    0.076866,
-                                    0.0794282,
-                                    0.0781471,
-                                    0.0755849,
-                                    0.0781471,
-                                    0.076866,
-                                    0.076866,
-                                    0.076866,
-                                    0.0743038,
-                                    0.0755849,
-                                    0.076866,
-                                    0.0743038,
-                                    0.076866,
-                                    0.0755849,
-                                    0.0743038,
-                                    0.0755849,
-                                    0.0755849,
-                                    0.0755849,
-                                    0.0755849,
-                                    0.076866,
-                                    0.076866,
-                                    0.0781471,
-                                    0.076866,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0781471,
-                                    0.0794282,
-                                    0.0794282,
-                                    0.0807093,
-                                    0.0794282,
-                                    0.0807093,
-                                    0.0819904,
-                                    0.0794282,
-                                    0.0832715,
-                                    0.0832715,
-                                    0.0819904,
-                                    0.0832715,
-                                    0.0845526,
-                                    0.0832715,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0832715,
-                                    0.0832715,
-                                    0.0819904,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0832715,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0858337,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0858337,
-                                    0.0858337,
-                                    0.0858337,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0858337,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0845526,
-                                    0.0871148,
-                                    0.0858337,
-                                    0.0871148,
-                                    0.0871148,
-                                    0.0858337,
-                                    0.0871148,
-                                    0.0871148,
-                                    0.0858337,
-                                    0.0858337,
-                                    0.0845526,
-                                    0.0858337,
-                                    0.0871148,
-                                    0.0845526,
-                                    0.0858337,
-                                    0.0845526]
-    
-    
-    var allTemperatureReadings: [Double] = [30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.19,
-                                            30.19,
-                                            30.19,
-                                            30.19,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.23,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.21,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.25,
-                                            30.29,
-                                            30.29,
-                                            30.29,
-                                            30.29,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.27,
-                                            30.29,
-                                            30.29,
-                                            30.29,
-                                            30.29]
     var readingsIndex = 0
     
     
@@ -319,15 +80,12 @@ class  Biomusic {
         
         mandolin2.detune = 1
         mandolin2.bodySize = 1.95
-        //mandolin2.presetElectricGuitarMandolin()
         
         let mandolin2Effect = AKLowPassFilter(mandolin2)
         
-        //mandolin2Effect.cutoffFrequency = 3000
         let mandolin2Reverb = AKCostelloReverb(mandolin2Effect)
         
         mandolin2Reverb.feedback = 2
-        //mandolin2Reverb.rampTime = 0.5
         
         // Prepare Output
         let mix = AKMixer(kick, snare, mandolinReverb, mandolin2Reverb, clarinet)
@@ -355,31 +113,34 @@ class  Biomusic {
             linearTime[i] = temp
         }
         
-        ibiGSRRatio = Int(allGSRReadings.count/allIBIReadings.count)
-        
         // Start Timers
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(playChord(_:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(playContinuousChord), userInfo: nil, repeats: true)
         timer2 = Timer.scheduledTimer(timeInterval: 1.0/4, target: self, selector: #selector(playMelody), userInfo: nil, repeats: true)
-
+        
     }
     
     
-    @objc func playChord(_ :Timer){
+     @objc func playContinuousChord(){
         let lastChord = currentChord
         
+        
+        // Invalidate old timers, reinitialize them with new frequencies (IBI)
         if (timerFrequency != newTimerFrequency){
             timer.invalidate()
             timer2.invalidate()
             
             timerFrequency = newTimerFrequency
-            timer = Timer.scheduledTimer(timeInterval: timerFrequency, target: self, selector: Selector(("playChord:note:scale:")), userInfo: nil, repeats: true)
-            
+            timer = Timer.scheduledTimer(timeInterval: timerFrequency, target: self, selector: #selector(playContinuousChord), userInfo: nil, repeats: true)
             timer2 = Timer.scheduledTimer(timeInterval: timerFrequency/4, target: self, selector: #selector(playMelody), userInfo: nil, repeats: true)
             
             print(" ", timerFrequency)
         }
         
         if (abs(currentTemp - baselineTemp) > deltaTemp){
+            
+            print("current temp     ", currentTemp, "baseline temp     ", baselineTemp)
+            
+            
             stopChord(note: Notes(rawValue: currentChord)!, scale: .Major)
             
             if (currentTemp > baselineTemp){    //Step up to the next chord in the cycle of fifth
@@ -396,7 +157,9 @@ class  Biomusic {
             scaleIndex = 0
         }
         
-        
+        if(lastChord != currentChord){
+            playChord(note: Notes(rawValue: currentChord)!, scale: .Major)
+        }
     }
     
     
@@ -424,12 +187,45 @@ class  Biomusic {
     
     
     
+    func updateTemperature (newTemperature: Double){
+        newTemperatureReading = newTemperature
+        
+        // Initialize matrix by filling it
+        if (currentTempReadings < readingsNumber){
+            temperatureReadings[currentTempReadings] = newTemperatureReading
+            currentTempReadings += 1
+        }
+        else {
+            // Shift readings matrix to the left and add new value to its end
+            for i in (0...readingsNumber - 2){
+                temperatureReadings[i] = temperatureReadings[i+1]
+            }
+            temperatureReadings[readingsNumber - 1] = newTemperatureReading
+        }
+    }
     
     
+    func updateGSR (newGSR: Double){
+       //print("The new gsr is \(newGSR)")
+        newGSRReading = newGSR
+        
+        // Update readings matrix
+        if (currentGSRReadings < readingsNumber){
+            GSRReadings[currentGSRReadings] = newGSRReading
+            currentGSRReadings += 1
+        }
+        else {
+            // Shift readings matrix to the left and add new value to its end
+            for i in (0...readingsNumber - 2){
+                GSRReadings[i] = GSRReadings[i+1]
+            }
+            GSRReadings[readingsNumber - 1] = newGSRReading
+        }
+    }
     
-    
-    
-    
+    func updateIBI (newIBI: Double){
+        newTimerFrequency = newIBI
+    }
     
     
     
@@ -441,57 +237,23 @@ class  Biomusic {
     
     
     @objc func playMelody(){
-        //==============================
-        //      Fetch new reading
-        //==============================
-        newTemperatureReading = allTemperatureReadings[readingsIndex]
-        newGSRReading = allGSRReadings[readingsIndex]
+        // Do the second derivative calculation for the temperature
+        var ATA = calculateATA(A: quadraticTime, rowsA: 5, columnsA: 3)
+        var ATb = calculateATb(A: quadraticTime, B: temperatureReadings, rowsA:5, columnsA:3)
+        var soln = solveSquareMatrix(A: ATA, b: ATb, dimA: 3)
+        let secondDerivativeTemp = 2 * soln[2]
         
-        if((Double(readingsIndex)).truncatingRemainder(dividingBy: (Double)(ibiGSRRatio)) == 0){
-            if (ibiIndex < allIBIReadings.count){
-                newTimerFrequency = allIBIReadings[ibiIndex]
-                print(newTimerFrequency)
-                ibiIndex += 1
-            }
-        }
+        // Do the first derivative calculation for the GSR
+        ATA = calculateATA(A: linearTime, rowsA: 5, columnsA: 2)
+        ATb = calculateATb(A: linearTime, B: GSRReadings, rowsA:5, columnsA:2)
+        soln = solveSquareMatrix(A: ATA, b: ATb, dimA: 2)
+        let firstDerivativeGSR = soln[1]
         
-        let y = Double(round(10000*newGSRReading)/10000)
+        // Update the current temperature and the current EDA values
+        currentTemp = secondDerivativeTemp
+        currentEDA = firstDerivativeGSR
         
-        // Update readings matrix
-        if (currentReadings < readingsNumber){
-            temperatureReadings[currentReadings] = newTemperatureReading
-            GSRReadings[currentReadings] = newGSRReading
-            currentReadings += 1
-        }
-        else {
-            // Shift readings matrix to the left and add new value to its end
-            for i in (0...readingsNumber - 2){
-                temperatureReadings[i] = temperatureReadings[i+1]
-                GSRReadings[i] = GSRReadings[i+1]
-            }
-            temperatureReadings[readingsNumber - 1] = newTemperatureReading
-            GSRReadings[readingsNumber - 1] = newGSRReading
-            
-            // Do the derivative calculation
-            var ATA = calculateATA(A: quadraticTime, rowsA: 5, columnsA: 3)
-            var ATb = calculateATb(A: quadraticTime, B: temperatureReadings, rowsA:5, columnsA:3)
-            var soln = solveSquareMatrix(A: ATA, b: ATb, dimA: 3)
-            let secondDerivativeTemp = 2 * soln[2]
-            
-            ATA = calculateATA(A: linearTime, rowsA: 5, columnsA: 2)
-            ATb = calculateATb(A: linearTime, B: GSRReadings, rowsA:5, columnsA:2)
-            soln = solveSquareMatrix(A: ATA, b: ATb, dimA: 2)
-            let firstDerivativeGSR = soln[1]
-            
-            currentTemp = secondDerivativeTemp
-            currentEDA = firstDerivativeGSR
-        }
-        
-        // Stop fetching readings at end of array
-        if (readingsIndex < allGSRReadings.count - 1){
-            readingsIndex += 1
-        }
-        
+        // Determine note to be played based on EDA (or GSR)
         if (abs(currentEDA - baselineEDA) > deltaEDA){
             if (currentEDA > baselineEDA){    //Step up to the next chord in the cycle of fifth
                 scaleIndex = Int((scaleIndex + 1).truncatingRemainder(dividingBy: 7))
@@ -506,6 +268,7 @@ class  Biomusic {
             }
         }
         
+        playMelodyNote(note: currentChord + majorScale[scaleIndex], generator: 1, octave: 4)
     }
     
     
@@ -553,7 +316,7 @@ class  Biomusic {
     }
     
     
-  func playChord(note: Notes, scale: Scales){
+    func playChord(note: Notes, scale: Scales){
         switch scale {
         case .Major:    //1 - 4 - 7
             playChordNote(note: note.rawValue, generator: 1, octave: 4)
@@ -565,7 +328,7 @@ class  Biomusic {
             playChordNote(note: (Int)((note.rawValue + 7).truncatingRemainder(dividingBy:12)), generator: 3, octave: 4)
         }
     }
-
+    
     func solveSquareMatrix( A: [[Double]], b:[Double], dimA: Int) -> [Double] {
         var x = [Double](repeating: 0.0, count: dimA)                  // Has the size of RowsA
         

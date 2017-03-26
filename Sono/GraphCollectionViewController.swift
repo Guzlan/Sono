@@ -53,7 +53,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     let hrQueue  = DispatchQueue(label: "hr", qos: .userInitiated)
     let gsrQueue  = DispatchQueue(label: "gsr", qos: .userInitiated)
     
-    var slider : UISlider?
+    let biomusic = Biomusic() 
     
     override func viewDidAppear(_ animated: Bool) {
         startNewSession()
@@ -293,6 +293,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveGSR(_ gsr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         gsrQueue.async {[unowned self] in
+            self.biomusic.updateGSR(newGSR: Double(gsr))
             self.gsrReading?.append("\(self.gsrCounter),\(gsr)\n")
             self.gsrCounter += 1
             self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp, andValue: gsr)
@@ -301,9 +302,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
+            self.biomusic.updateIBI(newIBI: Double(ibi))
             self.ibiReading?.append("\(self.ibiCounter),\(ibi)\n")
             self.ibiCounter += 1
-            print("\"Time is \(timestamp)\",",terminator:"")
+            //print("\"Time is \(timestamp)\",",terminator:"")
             
         }
         
@@ -318,10 +320,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         tempQueue.async {[unowned self] in
+            self.biomusic.updateTemperature(newTemperature: Double(temp))
             self.tempReading?.append("\(self.tempCounter),\(temp)\n")
             self.tempCounter += 1
         }
-        
     }
     func setBackgroundColor(){
         let bc = CAGradientLayer()
