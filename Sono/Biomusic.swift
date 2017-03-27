@@ -35,7 +35,7 @@ class  Biomusic {
     var temperatureMovingAvgFilter: [Double] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var temperatureReadings: [Double] = [0, 0, 0, 0, 0]
     var newTemperatureReading: Double = 0.0
-    var deltaTemp   : Double = 0.025
+    var deltaTemp   : Double = 0.03
     var currentTemp : Double = 36.4
     var baselineTemp: Double = 0
     
@@ -45,7 +45,7 @@ class  Biomusic {
     var GSRMovingAvgFilter: [Double] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var GSRReadings: [Double] = [0, 0, 0, 0, 0]
     var newGSRReading: Double = 0.0
-    var deltaEDA     : Double = 0.005
+    var deltaEDA     : Double = 0.0005
     var baselineEDA : Double = 0
     var currentEDA  : Double = 0.1
     
@@ -54,7 +54,6 @@ class  Biomusic {
     var newHRReading: Double = 0.0
     var newTimerFrequency: Double = 1.0
     var timerFrequency:Double = 1.0
-    
     
     var currentChord: Int    = 0
     var pluckPosition   = 0.5
@@ -168,7 +167,7 @@ class  Biomusic {
             scaleIndex = 0
         }
         
-        print(baselineTemp, currentTemp)
+        //print(baselineTemp, currentTemp)
         lastTimeSinceReattack += 1
         
         if(lastChord != currentChord){
@@ -287,7 +286,7 @@ class  Biomusic {
         currentTemp = secondDerivativeTemp
         currentEDA = firstDerivativeGSR
         
-//        print(baselineEDA, currentEDA)
+        print(baselineEDA, currentEDA)
         
         // Determine note to be played based on EDA (or GSR)
         if (abs(currentEDA - baselineEDA) > deltaEDA){

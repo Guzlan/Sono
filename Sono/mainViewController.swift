@@ -13,6 +13,8 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     var settingsBarButton : UIBarButtonItem?
     var device : EmpaticaDeviceManager?
     var segueDestination : String?
+    var timer = Timer()
+    var buttonColour = UIColor.white.cgColor
     
     @IBOutlet weak var scanStatusLabel: UILabel!
     @IBOutlet weak var senderBtn: UIButton!
@@ -28,8 +30,9 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        let borderColor = UIColor(red: 0.41, green: 1.28, blue: 1.85, alpha: 0.0)
         senderBtn.layer.borderWidth = 4
-        senderBtn.layer.borderColor = UIColor.white.cgColor
+        senderBtn.layer.borderColor = borderColor.cgColor
         scanStatusLabel.text = ""
         let iOSDevice = Device()
         switch iOSDevice{
@@ -45,6 +48,29 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
             print("Not really sure what iOS device this is")
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        
+//        
+//        UIView.animate(withDuration: 1.5, animations: {
+//            self.senderBtn.alpha = 1.0
+//        })
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(animateButton), userInfo: nil, repeats: true)
+    }
+    
+    func animateButton (){
+        self.senderBtn.layer.borderWidth = 3.0
+        let color: CABasicAnimation = CABasicAnimation(keyPath: "borderColor")
+        color.fromValue = UIColor.clear.cgColor
+        color.toValue = buttonColour
+        color.duration = 1.5
+        color.autoreverses = true
+        self.senderBtn.layer.borderColor = UIColor.clear.cgColor
+        self.senderBtn.layer.add(color, forKey: "")
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,6 +85,7 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
             print("I was able to find \(devices.count)")
             scanStatusLabel.text = "Success detecting Device"
             scanStatusLabel.textColor = UIColor.green
+            buttonColour = UIColor.green.cgColor
             if let foundDevice =  (devices[0] as? EmpaticaDeviceManager){
                 device = foundDevice
                 performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
@@ -68,6 +95,7 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
             print("I was not able to find devices")
             scanStatusLabel.text = "Failed To Detect Device"
             scanStatusLabel.textColor = UIColor.red
+            buttonColour = UIColor.red.cgColor
         }
     }
     func didUpdate(_ status: BLEStatus) {
