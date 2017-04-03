@@ -83,6 +83,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setUpGradientBackground()
         connectedE4?.connect(with: self)
         self.tabBarItem.title = "Biomusic"
+        self.tabBarItem.setFAIcon(icon: .FAMusic)
     }
     
     
@@ -124,6 +125,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             graphs[i].legend.enabled = false
             graphs[i].leftAxis.labelTextColor = UIColor.white
             graphs[i].xAxis.labelTextColor = UIColor.white
+            graphs[i].xAxis.axisMinimum = 0
             if i == 0 {
                 graphs[i].leftAxis.axisMinimum = -100.00
                 graphs[i].leftAxis.axisMaximum = 100.00
@@ -290,6 +292,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveBVP(_ bvp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         bvpQueue.async { [unowned self] in
+            print("IM STILL ALIVE!!!")
             self.bvpReading?.append("\(self.bvpCounter),\(bvp) \n")
             self.bvpCounter += 1
             self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)

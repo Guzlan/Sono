@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D79F4F11E92EA4500122446 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D79F4F01E92EA4500122446 /* TabBarViewController.swift */; };
+		3D79F4F51E92EAE900122446 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D79F4F41E92EAE900122446 /* AboutViewController.swift */; };
 		9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */; };
 		C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */; };
 		C522A7B11DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */; };
@@ -77,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sono.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D79F4F01E92EA4500122446 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		3D79F4F41E92EAE900122446 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewController.swift; sourceTree = "<group>"; };
 		C522A7AA1DB41E81003D5913 /* EmpaticaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmpaticaBridge.h; sourceTree = "<group>"; };
 		C522A7B01DB46CF8003D5913 /* EmpaLink-ios-0.7-full.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "EmpaLink-ios-0.7-full.framework"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			children = (
 				C5CD0EF61DA14B0D00B1355D /* images */,
 				C5CD0EEA1DA024B700B1355D /* BWWalkthroughPageViewController.swift */,
+				3D79F4F01E92EA4500122446 /* TabBarViewController.swift */,
+				3D79F4F41E92EAE900122446 /* AboutViewController.swift */,
 				C5CD0EEB1DA024B700B1355D /* BWWalkthroughViewController.swift */,
 				C54372C21DA01BB900BBCD87 /* AppDelegate.swift */,
 				C54372C41DA01BB900BBCD87 /* ViewController.swift */,
@@ -365,9 +371,11 @@
 			files = (
 				C5CD0EED1DA024B700B1355D /* BWWalkthroughViewController.swift in Sources */,
 				C5CD0EEC1DA024B700B1355D /* BWWalkthroughPageViewController.swift in Sources */,
+				3D79F4F11E92EA4500122446 /* TabBarViewController.swift in Sources */,
 				C5CD0EEF1DA0ABA100B1355D /* mainViewController.swift in Sources */,
 				C587FF171DC29C3B00A4B5C6 /* InformationCollectionViewCell.swift in Sources */,
 				C5E795CB1DEFA54900C00472 /* UploadViewController.swift in Sources */,
+				3D79F4F51E92EAE900122446 /* AboutViewController.swift in Sources */,
 				C54372C51DA01BB900BBCD87 /* ViewController.swift in Sources */,
 				C59EB92F1E750023000A51F1 /* Biomusic.swift in Sources */,
 				C50D4FCF1DC1638E009F1505 /* GraphCollectionViewController.swift in Sources */,
