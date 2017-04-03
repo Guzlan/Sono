@@ -194,7 +194,8 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func setChartData(forChart chart: LineChartView, withNumber num : Int){
         //        chart.xAxis.labelPosition = .bottom
         var entries = [ChartDataEntry]()
-        entries.append(ChartDataEntry(x: -1, y: 0))
+        entries.append(ChartDataEntry(x: 0, y: 0))
+        
         //        for i in 0..<months.count{
         //            entries.append(ChartDataEntry(x: Double(i), y: dollars1[i]))
         //        }
