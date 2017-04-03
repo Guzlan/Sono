@@ -38,6 +38,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var updatedSecond : Double = 0.0
     var lastBVPReading : Float = 0.0
     var lastGSRReading : Float = 0.0
+    var timeEpoch = Double(Date().timeIntervalSince1970)
     
     
     var connectedE4  : EmpaticaDeviceManager?
@@ -118,12 +119,17 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             graphs[i].animate(xAxisDuration: 2.0)
             graphs[i].animate(yAxisDuration: 2.0)
             graphs[i].zoom(scaleX: CGFloat(1.0), scaleY: CGFloat(1.0), xValue: 0, yValue: Double(0), axis: .left)
+            graphs[i].chartDescription?.font = UIFont(name: "Helvetica", size: 22)!
+            graphs[i].chartDescription?.textColor = UIColor.white
+            graphs[i].legend.enabled = false
+            graphs[i].leftAxis.labelTextColor = UIColor.white
+            graphs[i].xAxis.labelTextColor = UIColor.white
             if i == 0 {
                 graphs[i].leftAxis.axisMinimum = -100.00
                 graphs[i].leftAxis.axisMaximum = 100.00
+                graphs[i].chartDescription?.text = "BVP"
             }else{
-                graphs[i].leftAxis.axisMinimum = 0.00
-                graphs[i].leftAxis.axisMaximum = 0.50
+                graphs[i].chartDescription?.text = "EDA "
             }
             setChartData(forChart: graphs[i], withNumber: i)
         }
@@ -286,7 +292,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         bvpQueue.async { [unowned self] in
             self.bvpReading?.append("\(self.bvpCounter),\(bvp) \n")
             self.bvpCounter += 1
-            self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp, andValue: bvp)
+            self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
         }
         
         
@@ -296,7 +302,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             self.biomusic.updateGSR(newGSR: Double(gsr))
             self.gsrReading?.append("\(self.gsrCounter),\(gsr)\n")
             self.gsrCounter += 1
-            self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp, andValue: gsr)
+            self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
         }
         
     }
