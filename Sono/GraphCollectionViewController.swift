@@ -39,8 +39,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var updatedSecond : Double = 0.0
     var lastBVPReading : Float = 0.0
     var lastGSRReading : Float = 0.0
+     var lastBatteryReading : Float = 0.0
     var timeEpoch = Double(Date().timeIntervalSince1970)
     
+   
     
     var connectedE4  : EmpaticaDeviceManager?
     var graphs = [LineChartView]() // an array to store our graphs
@@ -281,10 +283,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         else{
             if indexPath.row == 0 {
-                return CGSize(width: 0.60*(self.view.frame.width-5), height:  (self.collectionView?.window?.frame.height)!*0.1)
+                return CGSize(width: 0.60*(self.view.frame.width-5), height:   (self.view.frame.height)*0.1)
             }
             else {
-                return CGSize(width: 0.30*(self.view.frame.width-5), height:  (self.collectionView?.window?.frame.height)!*0.1)
+                return CGSize(width: 0.30*(self.view.frame.width-5), height:   (self.view.frame.height)*0.1)
             }
     
         }
@@ -344,6 +346,25 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         
     }
+    func didReceiveBatteryLevel(_ level: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
+        if level !=   lastBatteryReading {
+            
+            lastBatteryReading = level
+        DispatchQueue.main.async {[unowned self] finished in
+        if level > 0.9 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryFull, postfixText: "", size: 25)
+        }else if level < 0.9 && level > 0.75 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryThreeQuarters, postfixText: "", size: 25)
+        }else if level > 0.4 && level < 0.75 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryHalf, postfixText: "", size: 25)
+        }else if level > 0.1 && level < 0.25 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryQuarter, postfixText: "", size: 25)
+        }else if level < 0.1 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryEmpty, postfixText: "", size: 25)
+        }
+        }
+        }
+    }
     func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         tempQueue.async {[unowned self] in
             self.biomusic.updateTemperature(newTemperature: Double(temp))
@@ -367,7 +388,6 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
             let graphData = graph.lineData
             let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
-            print("The current size if \(graphDataSet.entryCount )")
             if graphDataSet.entryCount  > 2000 {
                 graphDataSet.removeFirst()
             }
@@ -439,10 +459,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
 
     }
     func setupBatteryLabel(){
-        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: 0.15*(self.view.frame.width-5)))
+        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: (self.view.frame.height)*0.1))
         self.battery?.font = UIFont(name: "Helvetica", size: 26)
-        self.battery?.textAlignment = .right
-        self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
+        battery?.backgroundColor =  UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        battery?.layer.cornerRadius = 10
+        battery?.clipsToBounds  = true
+        self.battery?.textAlignment = .center
+        //self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
         self.battery?.textColor = UIColor.white
     }
     override func viewWillDisappear(_ animated: Bool) {
