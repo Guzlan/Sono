@@ -51,11 +51,6 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        
-//        
-//        UIView.animate(withDuration: 1.5, animations: {
-//            self.senderBtn.alpha = 1.0
-//        })
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(animateButton), userInfo: nil, repeats: true)
     }
     

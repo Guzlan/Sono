@@ -15,6 +15,7 @@ class TabBarViewController: UITabBarController {
         let aboutView = AboutViewController()
         aboutView.tabBarItem.title = "About"
         aboutView.tabBarItem.setFAIcon(icon: .FAFileTextO)
+        self.tabBar.tintColor =  UIColor(colorLiteralRed: 0.909 , green: 0.255, blue: 0.231, alpha: 1.00)
         self.viewControllers?.append(aboutView)
 
     }
