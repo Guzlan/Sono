@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3i0-m3-Tau">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3i0-m3-Tau">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -330,29 +330,10 @@
             </objects>
             <point key="canvasLocation" x="5505" y="-600"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="Kp8-K0-SeQ">
-            <objects>
-                <viewController id="LcF-Yq-qRt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1Ud-8O-MSm"/>
-                        <viewControllerLayoutGuide type="bottom" id="w4a-bz-cMB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="epF-CC-ReV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="AVB-5l-GpA"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="klM-Fs-5N4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5505" y="94"/>
-        </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="p4K-rk-G2h">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ANP-m6-46Q" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ANP-m6-46Q" customClass="TabBarViewController" customModule="Sono" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ftq-Br-cN8">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -361,7 +342,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="lf9-dP-iPv" kind="relationship" relationship="viewControllers" id="ebp-hI-rMU"/>
-                        <segue destination="LcF-Yq-qRt" kind="relationship" relationship="viewControllers" id="aCr-bi-0AY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wBe-UA-1K9" userLabel="First Responder" sceneMemberID="firstResponder"/>

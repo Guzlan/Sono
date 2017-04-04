@@ -27,6 +27,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var batteryReading : String?
     
     var battery : UILabel?
+    var skinTemperatureLabel : UILabel?
     
     var tempCounter = 0
     var gsrCounter = 0
@@ -38,7 +39,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var updatedSecond : Double = 0.0
     var lastBVPReading : Float = 0.0
     var lastGSRReading : Float = 0.0
+     var lastBatteryReading : Float = 0.0
+    var timeEpoch = Double(Date().timeIntervalSince1970)
     
+   
     
     var connectedE4  : EmpaticaDeviceManager?
     var graphs = [LineChartView]() // an array to store our graphs
@@ -53,7 +57,15 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     let hrQueue  = DispatchQueue(label: "hr", qos: .userInitiated)
     let gsrQueue  = DispatchQueue(label: "gsr", qos: .userInitiated)
     
-    let biomusic = Biomusic() 
+    let biomusic = Biomusic()
+    
+    var playPauseButton : UIButton?
+    var muteMusic : UIButton?
+    
+    
+    
+    var isGraphing = true
+    var isMute = false
     
     override func viewDidAppear(_ animated: Bool) {
         startNewSession()
@@ -65,6 +77,9 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setBackgroundColor()
         batteryReading = ""
         setupBatteryLabel()
+        configureSkinTemperatureLabel()
+        configurePlayPauseButton()
+        configureMuteMusicButton()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: grapCellIdentifier) // register the reusable cell we have
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 5, bottom: 0, right: 5)
@@ -82,6 +97,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setUpGradientBackground()
         connectedE4?.connect(with: self)
         self.tabBarItem.title = "Biomusic"
+        self.tabBarItem.setFAIcon(icon: .FAMusic)
     }
     
     
@@ -118,12 +134,18 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             graphs[i].animate(xAxisDuration: 2.0)
             graphs[i].animate(yAxisDuration: 2.0)
             graphs[i].zoom(scaleX: CGFloat(1.0), scaleY: CGFloat(1.0), xValue: 0, yValue: Double(0), axis: .left)
+            graphs[i].chartDescription?.font = UIFont(name: "Helvetica", size: 22)!
+            graphs[i].chartDescription?.textColor = UIColor.white
+            graphs[i].legend.enabled = false
+            graphs[i].leftAxis.labelTextColor = UIColor.white
+            graphs[i].xAxis.labelTextColor = UIColor.white
+            graphs[i].xAxis.axisMinimum = 0
             if i == 0 {
                 graphs[i].leftAxis.axisMinimum = -100.00
                 graphs[i].leftAxis.axisMaximum = 100.00
+                graphs[i].chartDescription?.text = "BVP"
             }else{
-                graphs[i].leftAxis.axisMinimum = 0.00
-                graphs[i].leftAxis.axisMaximum = 0.50
+                graphs[i].chartDescription?.text = "EDA "
             }
             setChartData(forChart: graphs[i], withNumber: i)
         }
@@ -173,10 +195,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
-                cell.layer.cornerRadius = 10
-                cell.layer.borderColor = UIColor.black.cgColor
-                cell.layer.borderWidth = 0.5
-                cell.backgroundColor = UIColor.red
+            if indexPath.row == 1 {
+                cell.addSubview(playPauseButton!)
+            }else if indexPath.row == 2{
+                cell.addSubview(muteMusic!)
+            }else{
+                cell.addSubview(skinTemperatureLabel!)
+            }
                 return cell
         }
         
@@ -186,7 +211,8 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func setChartData(forChart chart: LineChartView, withNumber num : Int){
         //        chart.xAxis.labelPosition = .bottom
         var entries = [ChartDataEntry]()
-        entries.append(ChartDataEntry(x: -1, y: 0))
+        entries.append(ChartDataEntry(x: 0, y: 0))
+        
         //        for i in 0..<months.count{
         //            entries.append(ChartDataEntry(x: Double(i), y: dollars1[i]))
         //        }
@@ -257,10 +283,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         else{
             if indexPath.row == 0 {
-                return CGSize(width: 0.60*(self.view.frame.width-5), height:  (self.collectionView?.window?.frame.height)!*0.1)
+                return CGSize(width: 0.60*(self.view.frame.width-5), height:   (self.view.frame.height)*0.1)
             }
             else {
-                return CGSize(width: 0.30*(self.view.frame.width-5), height:  (self.collectionView?.window?.frame.height)!*0.1)
+                return CGSize(width: 0.30*(self.view.frame.width-5), height:   (self.view.frame.height)*0.1)
             }
     
         }
@@ -284,9 +310,12 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveBVP(_ bvp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         bvpQueue.async { [unowned self] in
-            self.bvpReading?.append("\(self.bvpCounter),\(bvp) \n")
             self.bvpCounter += 1
-            self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp, andValue: bvp)
+            DispatchQueue.main.async(execute: {[unowned self] in
+            if self.isGraphing{
+                self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
+            }
+            })
         }
         
         
@@ -294,35 +323,56 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func didReceiveGSR(_ gsr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         gsrQueue.async {[unowned self] in
             self.biomusic.updateGSR(newGSR: Double(gsr))
-            self.gsrReading?.append("\(self.gsrCounter),\(gsr)\n")
             self.gsrCounter += 1
-            self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp, andValue: gsr)
+            DispatchQueue.main.async(execute: {[unowned self] in
+            if self.isGraphing{
+                self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
+            }
+            })
         }
         
     }
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
             self.biomusic.updateIBI(newIBI: Double(ibi))
-            self.ibiReading?.append("\(self.ibiCounter),\(ibi)\n")
             self.ibiCounter += 1
-            //print("\"Time is \(timestamp)\",",terminator:"")
-            
         }
         
         
     }
     func didReceiveHR(_ hr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         hrQueue.async {[unowned self] in
-            self.hrReading?.append("\(self.hrCounter),\(hr)\n")
             self.hrCounter += 1
         }
         
     }
+    func didReceiveBatteryLevel(_ level: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
+        if level !=   lastBatteryReading {
+            
+            lastBatteryReading = level
+        DispatchQueue.main.async {[unowned self] finished in
+        if level > 0.9 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryFull, postfixText: "", size: 25)
+        }else if level < 0.9 && level > 0.75 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryThreeQuarters, postfixText: "", size: 25)
+        }else if level > 0.4 && level < 0.75 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryHalf, postfixText: "", size: 25)
+        }else if level > 0.1 && level < 0.25 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryQuarter, postfixText: "", size: 25)
+        }else if level < 0.1 {
+             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryEmpty, postfixText: "", size: 25)
+        }
+        }
+        }
+    }
     func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         tempQueue.async {[unowned self] in
             self.biomusic.updateTemperature(newTemperature: Double(temp))
-            self.tempReading?.append("\(self.tempCounter),\(temp)\n")
-            self.tempCounter += 1
+            DispatchQueue.main.async {
+                let temp = Double(temp*100).rounded()/100
+                self.skinTemperatureLabel!.text = "\(temp)C°"
+            }
+            
         }
     }
     func setBackgroundColor(){
@@ -336,26 +386,87 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         self.collectionView?.layer.insertSublayer(bc, at: 0)
     }
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
-        DispatchQueue.main.async(execute:{
             let graphData = graph.lineData
             let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
+            if graphDataSet.entryCount  > 2000 {
+                graphDataSet.removeFirst()
+            }
             graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
             graphData?.notifyDataChanged()
             graphDataSet.notifyDataSetChanged()
             graph.notifyDataSetChanged()
             graph.setVisibleXRangeMaximum(10)
             graph.moveViewToX(timestamp)
-            
-            
-        })
+    }
+    
+    func configureSkinTemperatureLabel(){
+        skinTemperatureLabel = UILabel(frame: CGRect(x: 0, y: 0,
+                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 height: CGFloat((self.view.frame.height)*0.1)))
+        skinTemperatureLabel?.lineBreakMode = .byWordWrapping
+        skinTemperatureLabel?.text = "--C°"
+        skinTemperatureLabel?.font = UIFont(name: "Helvetica", size: 22)
+        skinTemperatureLabel?.textAlignment = .center
+        skinTemperatureLabel?.textColor = UIColor.white
+        skinTemperatureLabel?.backgroundColor = UIColor(colorLiteralRed: 0.909 , green: 0.255, blue: 0.231, alpha: 1.00)
+        skinTemperatureLabel?.layer.cornerRadius = 10
+        skinTemperatureLabel?.clipsToBounds  = true
+        
+    }
+    
+    func configurePlayPauseButton(){
+        
+        
+        playPauseButton = UIButton(frame: CGRect(x: 0, y: 0,
+                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 height: CGFloat((self.view.frame.height)*0.1)))
+        playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
+        playPauseButton?.contentVerticalAlignment = .center
+        playPauseButton?.setFATitleColor(color: UIColor.white)
+        playPauseButton?.backgroundColor = UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        playPauseButton?.layer.cornerRadius = 10
+        playPauseButton?.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        
+    }
+    func configureMuteMusicButton(){
+        muteMusic = UIButton(frame: CGRect(x: 0, y: 0,
+                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 height: CGFloat((self.view.frame.height)*0.1)))
+        muteMusic?.setFAIcon(icon: .FAVolumeUp, iconSize:40, forState: .normal)
+        muteMusic?.contentVerticalAlignment = .center
+        muteMusic?.setFATitleColor(color: UIColor.white)
+        muteMusic?.backgroundColor = UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        muteMusic?.layer.cornerRadius = 10
+        muteMusic?.addTarget(self, action: #selector(muteSound), for: .touchUpInside)
+    }
+    func muteSound(){
+        if isMute{
+            muteMusic?.setFAIcon(icon: .FAVolumeUp, iconSize:40, forState: .normal)
+            isMute = false
+        }else{
+            muteMusic?.setFAIcon(icon: .FAVolumeOff, iconSize:40, forState: .normal)
+            isMute = true
+        }
+    }
+    func playPause(){
+        if isGraphing {
+            playPauseButton?.setFAIcon(icon: .FAPlay, iconSize:40, forState: .normal)
+            isGraphing = false
+        }else{
+            playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
+            isGraphing = true
+        }
+
     }
     func setupBatteryLabel(){
-        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: 0.15*(self.view.frame.width-5)))
+        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: (self.view.frame.height)*0.1))
         self.battery?.font = UIFont(name: "Helvetica", size: 26)
-        self.battery?.textAlignment = .right
-        self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
-        self.battery?.setFAColor(color: UIColor.green)
-        self.battery?.textColor = UIColor.black
+        battery?.backgroundColor =  UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        battery?.layer.cornerRadius = 10
+        battery?.clipsToBounds  = true
+        self.battery?.textAlignment = .center
+        //self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
+        self.battery?.textColor = UIColor.white
     }
     override func viewWillDisappear(_ animated: Bool) {
         
