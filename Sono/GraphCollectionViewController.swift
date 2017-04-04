@@ -27,6 +27,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var batteryReading : String?
     
     var battery : UILabel?
+    var skinTemperatureLabel : UILabel?
     
     var tempCounter = 0
     var gsrCounter = 0
@@ -54,7 +55,15 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     let hrQueue  = DispatchQueue(label: "hr", qos: .userInitiated)
     let gsrQueue  = DispatchQueue(label: "gsr", qos: .userInitiated)
     
-    let biomusic = Biomusic() 
+    let biomusic = Biomusic()
+    
+    var playPauseButton : UIButton?
+    var muteMusic : UIButton?
+    
+    
+    
+    var isGraphing = true
+    var isMute = false
     
     override func viewDidAppear(_ animated: Bool) {
         startNewSession()
@@ -66,6 +75,9 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setBackgroundColor()
         batteryReading = ""
         setupBatteryLabel()
+        configureSkinTemperatureLabel()
+        configurePlayPauseButton()
+        configureMuteMusicButton()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: grapCellIdentifier) // register the reusable cell we have
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 5, bottom: 0, right: 5)
@@ -181,10 +193,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
-                cell.layer.cornerRadius = 10
-                cell.layer.borderColor = UIColor.black.cgColor
-                cell.layer.borderWidth = 0.5
-                cell.backgroundColor = UIColor.red
+            if indexPath.row == 1 {
+                cell.addSubview(playPauseButton!)
+            }else if indexPath.row == 2{
+                cell.addSubview(muteMusic!)
+            }else{
+                cell.addSubview(skinTemperatureLabel!)
+            }
                 return cell
         }
         
@@ -293,10 +308,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveBVP(_ bvp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         bvpQueue.async { [unowned self] in
-            print("IM STILL ALIVE!!!")
-            self.bvpReading?.append("\(self.bvpCounter),\(bvp) \n")
             self.bvpCounter += 1
-            self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
+            if self.isGraphing{
+                self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
+            }
         }
         
         
@@ -304,26 +319,23 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func didReceiveGSR(_ gsr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         gsrQueue.async {[unowned self] in
             self.biomusic.updateGSR(newGSR: Double(gsr))
-            self.gsrReading?.append("\(self.gsrCounter),\(gsr)\n")
             self.gsrCounter += 1
-            self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
+            if self.isGraphing{
+                self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
+            }
         }
         
     }
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
             self.biomusic.updateIBI(newIBI: Double(ibi))
-            self.ibiReading?.append("\(self.ibiCounter),\(ibi)\n")
             self.ibiCounter += 1
-            //print("\"Time is \(timestamp)\",",terminator:"")
-            
         }
         
         
     }
     func didReceiveHR(_ hr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         hrQueue.async {[unowned self] in
-            self.hrReading?.append("\(self.hrCounter),\(hr)\n")
             self.hrCounter += 1
         }
         
@@ -331,8 +343,11 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         tempQueue.async {[unowned self] in
             self.biomusic.updateTemperature(newTemperature: Double(temp))
-            self.tempReading?.append("\(self.tempCounter),\(temp)\n")
-            self.tempCounter += 1
+            DispatchQueue.main.async {
+                let temp = Double(temp*100).rounded()/100
+                self.skinTemperatureLabel!.text = "\(temp)C°"
+            }
+            
         }
     }
     func setBackgroundColor(){
@@ -359,13 +374,72 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             
         })
     }
+    
+    func configureSkinTemperatureLabel(){
+        skinTemperatureLabel = UILabel(frame: CGRect(x: 0, y: 0,
+                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 height: CGFloat((self.view.frame.height)*0.1)))
+        skinTemperatureLabel?.lineBreakMode = .byWordWrapping
+        skinTemperatureLabel?.text = "--C°"
+        skinTemperatureLabel?.font = UIFont(name: "Helvetica", size: 22)
+        skinTemperatureLabel?.textAlignment = .center
+        skinTemperatureLabel?.textColor = UIColor.white
+        skinTemperatureLabel?.backgroundColor = UIColor(colorLiteralRed: 0.909 , green: 0.255, blue: 0.231, alpha: 1.00)
+        skinTemperatureLabel?.layer.cornerRadius = 10
+        skinTemperatureLabel?.clipsToBounds  = true
+        
+    }
+    
+    func configurePlayPauseButton(){
+        
+        
+        playPauseButton = UIButton(frame: CGRect(x: 0, y: 0,
+                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 height: CGFloat((self.view.frame.height)*0.1)))
+        playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
+        playPauseButton?.contentVerticalAlignment = .center
+        playPauseButton?.setFATitleColor(color: UIColor.white)
+        playPauseButton?.backgroundColor = UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        playPauseButton?.layer.cornerRadius = 10
+        playPauseButton?.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        
+    }
+    func configureMuteMusicButton(){
+        muteMusic = UIButton(frame: CGRect(x: 0, y: 0,
+                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 height: CGFloat((self.view.frame.height)*0.1)))
+        muteMusic?.setFAIcon(icon: .FAVolumeUp, iconSize:40, forState: .normal)
+        muteMusic?.contentVerticalAlignment = .center
+        muteMusic?.setFATitleColor(color: UIColor.white)
+        muteMusic?.backgroundColor = UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        muteMusic?.layer.cornerRadius = 10
+        muteMusic?.addTarget(self, action: #selector(muteSound), for: .touchUpInside)
+    }
+    func muteSound(){
+        if isMute{
+            muteMusic?.setFAIcon(icon: .FAVolumeUp, iconSize:40, forState: .normal)
+            isMute = false
+        }else{
+            muteMusic?.setFAIcon(icon: .FAVolumeOff, iconSize:40, forState: .normal)
+            isMute = true
+        }
+    }
+    func playPause(){
+        if isGraphing {
+            playPauseButton?.setFAIcon(icon: .FAPlay, iconSize:40, forState: .normal)
+            isGraphing = false
+        }else{
+            playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
+            isGraphing = true
+        }
+
+    }
     func setupBatteryLabel(){
         self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: 0.15*(self.view.frame.width-5)))
         self.battery?.font = UIFont(name: "Helvetica", size: 26)
         self.battery?.textAlignment = .right
         self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
-        self.battery?.setFAColor(color: UIColor.green)
-        self.battery?.textColor = UIColor.black
+        self.battery?.textColor = UIColor.white
     }
     override func viewWillDisappear(_ animated: Bool) {
         

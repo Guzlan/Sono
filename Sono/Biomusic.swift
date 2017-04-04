@@ -286,7 +286,7 @@ class  Biomusic {
         currentTemp = secondDerivativeTemp
         currentEDA = firstDerivativeGSR
         
-        print(baselineEDA, currentEDA)
+        //print(baselineEDA, currentEDA)
         
         // Determine note to be played based on EDA (or GSR)
         if (abs(currentEDA - baselineEDA) > deltaEDA){

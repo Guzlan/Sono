@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         let aboutView = AboutViewController()
         aboutView.tabBarItem.title = "About"
-        aboutView.tabBarItem.setFAIcon(icon: .FAFolderO)
+        aboutView.tabBarItem.setFAIcon(icon: .FAFileTextO)
         self.viewControllers?.append(aboutView)
 
     }
