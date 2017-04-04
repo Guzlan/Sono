@@ -309,9 +309,11 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func didReceiveBVP(_ bvp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         bvpQueue.async { [unowned self] in
             self.bvpCounter += 1
+            DispatchQueue.main.async(execute: {[unowned self] in
             if self.isGraphing{
                 self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
             }
+            })
         }
         
         
@@ -320,9 +322,11 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         gsrQueue.async {[unowned self] in
             self.biomusic.updateGSR(newGSR: Double(gsr))
             self.gsrCounter += 1
+            DispatchQueue.main.async(execute: {[unowned self] in
             if self.isGraphing{
                 self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
             }
+            })
         }
         
     }
@@ -361,18 +365,18 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         self.collectionView?.layer.insertSublayer(bc, at: 0)
     }
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
-        DispatchQueue.main.async(execute:{
             let graphData = graph.lineData
             let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
+            print("The current size if \(graphDataSet.entryCount )")
+            if graphDataSet.entryCount  > 2000 {
+                graphDataSet.removeFirst()
+            }
             graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
             graphData?.notifyDataChanged()
             graphDataSet.notifyDataSetChanged()
             graph.notifyDataSetChanged()
             graph.setVisibleXRangeMaximum(10)
             graph.moveViewToX(timestamp)
-            
-            
-        })
     }
     
     func configureSkinTemperatureLabel(){
