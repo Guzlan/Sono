@@ -68,6 +68,9 @@ class  Biomusic {
     var readingsIndex = 0
     
     
+    public var isPlaying = true
+    
+    
     // Enums
     enum Notes: Int {
         case C = 0, C_Sharp, D, D_Sharp, E, F, F_Sharp, G, G_Sharp, A, A_Sharp, B
@@ -136,6 +139,7 @@ class  Biomusic {
     
     
      @objc func playContinuousChord(){
+        if isPlaying{
         let lastChord = currentChord
         kick.play(noteNumber: 100, velocity: 55)
         
@@ -165,6 +169,7 @@ class  Biomusic {
                 currentChord = 12 + currentChord
             }
             scaleIndex = 0
+            
         }
         
         //print(baselineTemp, currentTemp)
@@ -178,6 +183,7 @@ class  Biomusic {
         else if (lastTimeSinceReattack == reattackDuration){
             playChord(note: Notes(rawValue: currentChord)!, scale: .Major)
             lastTimeSinceReattack = 0
+        }
         }
     }
     
@@ -270,6 +276,7 @@ class  Biomusic {
     
     // The melody is Controled by the second derivative of the GSR
     @objc func playMelody(){
+        if isPlaying{
         // Do the second derivative calculation for the temperature
         var ATA = calculateATA(A: quadraticTime, rowsA: 5, columnsA: 3)
         var ATb = calculateATb(A: quadraticTime, B: temperatureReadings, rowsA:5, columnsA:3)
@@ -304,6 +311,7 @@ class  Biomusic {
         }
         
         playMelodyNote(note: currentChord + majorScale[scaleIndex], generator: 1, octave: 4)
+        }
     }
     
     

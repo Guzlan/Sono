@@ -121,8 +121,9 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
         if segue.identifier == "displayGraphsSegue"{
             let destinationVC = segue.destination as! UITabBarController
              let viewControllersManaged = destinationVC.viewControllers
-             let mainDestinationVc = viewControllersManaged?[0] as! GraphCollectionViewController
-             mainDestinationVc.connectedE4 = device
+             let navigationController = viewControllersManaged?[0] as! UINavigationController
+             let mainDestinationVc = navigationController.topViewController as! GraphCollectionViewController
+            mainDestinationVc.connectedE4 = device
         }
     }
 

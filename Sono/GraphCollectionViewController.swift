@@ -74,7 +74,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     
     
     override func viewDidLoad() {
-        self.tabBarController?.title = "Biomusic"
+    
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor.white
         self.collectionView?.isScrollEnabled = false
@@ -86,7 +86,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         configurePlayPauseButton()
         configureMuteMusicButton()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: grapCellIdentifier) // register the reusable cell we have
-        self.collectionView!.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        self.collectionView!.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10 , left: 5, bottom: 0, right: 5)
         self.collectionView!.collectionViewLayout = layout
@@ -100,8 +100,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setUp(graphs: graphs)
         setUpGradientBackground()
         connectedE4?.connect(with: self)
-        self.tabBarItem.title = "Biomusic"
-        self.tabBarItem.setFAIcon(icon: .FAMusic)
+        self.navigationItem.title = "Biomusic"
+        self.navigationController?.tabBarItem.title = "Biomusic"
+        self.navigationController?.tabBarItem.setFAIcon(icon: .FAMusic)
+        //self.tabBarItem.setFAIcon(icon: .FAMusic)
     }
     
     
@@ -274,7 +276,9 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         if indexPath.section == 1{
             return CGSize(width: self.view.frame.width-5, height: (self.collectionView?.window?.frame.height)!*0.3)
         }
-        else{
+        else if indexPath.section == 0{
+            return CGSize(width: 0.45*(self.view.frame.width), height:   (self.view.frame.height)*0.05)
+        }else{
             return CGSize(width: 0.45*(self.view.frame.width), height:   (self.view.frame.height)*0.1)
         }
     }
@@ -323,7 +327,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         ibiQueue.async {[unowned self] in
             self.biomusic.updateIBI(newIBI: Double(ibi))
             DispatchQueue.main.async {
-                let temp = (1/(Double(ibi*100))).rounded()/100
+                let temp = (60/Double(ibi)).rounded()
                 self.hrLabel!.text = "\(temp)bpm"
             }
             self.ibiCounter += 1
@@ -339,7 +343,6 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveBatteryLevel(_ level: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         if level !=   lastBatteryReading {
-            
             lastBatteryReading = level
             DispatchQueue.main.async {[unowned self] finished in
                 if level > 0.9 {
@@ -393,14 +396,14 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func configureSkinTemperatureLabel(){
         skinTemperatureLabel = UILabel(frame: CGRect(x: 0, y: 0,
                                                      width: CGFloat(0.45*(self.view.frame.width)),
-                                                     height: CGFloat((self.view.frame.height)*0.1)))
+                                                     height: CGFloat((self.view.frame.height)*0.05)))
         skinTemperatureLabel?.lineBreakMode = .byWordWrapping
         skinTemperatureLabel?.text = "--C°"
-        skinTemperatureLabel?.font = UIFont(name: "Helvetica", size: 22)
+        skinTemperatureLabel?.font = UIFont(name: "Helvetica", size: 20)
         skinTemperatureLabel?.textAlignment = .center
         skinTemperatureLabel?.textColor = UIColor.white
         skinTemperatureLabel?.backgroundColor = UIColor(colorLiteralRed: 0.035 , green: 0.420, blue: 0.573, alpha: 1.00)
-        skinTemperatureLabel?.layer.cornerRadius = 10
+        skinTemperatureLabel?.layer.cornerRadius = 5
         skinTemperatureLabel?.clipsToBounds  = true
         
     }
@@ -408,14 +411,14 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func configureHRLabel(){
         hrLabel = UILabel(frame: CGRect(x: 0, y: 0,
                                                      width: CGFloat(0.45*(self.view.frame.width)),
-                                                     height: CGFloat((self.view.frame.height)*0.1)))
+                                                     height: CGFloat((self.view.frame.height)*0.05)))
         hrLabel?.lineBreakMode = .byWordWrapping
         hrLabel?.text = "--bpm"
-        hrLabel?.font = UIFont(name: "Helvetica", size: 22)
+        hrLabel?.font = UIFont(name: "Helvetica", size: 20)
         hrLabel?.textAlignment = .center
         hrLabel?.textColor = UIColor.white
         hrLabel?.backgroundColor = UIColor(colorLiteralRed: 0.035 , green: 0.420, blue: 0.573, alpha: 1.00)
-        hrLabel?.layer.cornerRadius = 10
+        hrLabel?.layer.cornerRadius = 5
         hrLabel?.clipsToBounds  = true
     }
     
@@ -457,9 +460,11 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         if isGraphing {
             playPauseButton?.setFAIcon(icon: .FAPlay, iconSize:40, forState: .normal)
             isGraphing = false
+            biomusic.isPlaying = false
         }else{
             playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
             isGraphing = true
+            biomusic.isPlaying = true
         }
         
     }
