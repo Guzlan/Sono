@@ -17,7 +17,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     
     var timer : Timer?
     
-
+    
     
     var tempReading : String?
     var gsrReading : String?
@@ -28,6 +28,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     
     var battery : UILabel?
     var skinTemperatureLabel : UILabel?
+    var hrLabel : UILabel?
     
     var tempCounter = 0
     var gsrCounter = 0
@@ -39,10 +40,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var updatedSecond : Double = 0.0
     var lastBVPReading : Float = 0.0
     var lastGSRReading : Float = 0.0
-     var lastBatteryReading : Float = 0.0
+    var lastBatteryReading : Float = 0.0
     var timeEpoch = Double(Date().timeIntervalSince1970)
     
-   
+    
     
     var connectedE4  : EmpaticaDeviceManager?
     var graphs = [LineChartView]() // an array to store our graphs
@@ -73,18 +74,21 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     
     
     override func viewDidLoad() {
+    
         super.viewDidLoad()
-        setBackgroundColor()
+        self.collectionView?.backgroundColor = UIColor.white
+        self.collectionView?.isScrollEnabled = false
+        //setBackgroundColor()
         batteryReading = ""
         setupBatteryLabel()
         configureSkinTemperatureLabel()
+        configureHRLabel()
         configurePlayPauseButton()
         configureMuteMusicButton()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: grapCellIdentifier) // register the reusable cell we have
+        self.collectionView!.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 5, bottom: 0, right: 5)
-        layout.minimumInteritemSpacing = 20
-        layout.minimumLineSpacing = 20
+        layout.sectionInset = UIEdgeInsets(top: 10 , left: 5, bottom: 0, right: 5)
         self.collectionView!.collectionViewLayout = layout
         tempReading = ("Time Stamp,Temperature\n")
         gsrReading = ("Time Stamp,Response\n")
@@ -96,8 +100,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         setUp(graphs: graphs)
         setUpGradientBackground()
         connectedE4?.connect(with: self)
-        self.tabBarItem.title = "Biomusic"
-        self.tabBarItem.setFAIcon(icon: .FAMusic)
+        self.navigationItem.title = "Biomusic"
+        self.navigationController?.tabBarItem.title = "Biomusic"
+        self.navigationController?.tabBarItem.setFAIcon(icon: .FAMusic)
+        //self.tabBarItem.setFAIcon(icon: .FAMusic)
     }
     
     
@@ -170,39 +176,31 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         
         if indexPath.section == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
-            cell.layer.cornerRadius = 10
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.borderWidth = 0.5
-            cell.backgroundColor = UIColor.red
-            if indexPath.row == 1{
-                cell.layer.borderColor = UIColor.clear.cgColor
-                cell.layer.borderWidth = 0
-                cell.backgroundColor = UIColor.clear
-                cell.addSubview(battery!)
+            if indexPath.row == 0 {
+                cell.addSubview(hrLabel!)
+            }else if indexPath.row == 1{
+                cell.addSubview(skinTemperatureLabel!)
             }
             return cell
         }
         else if indexPath.section == 1{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GraphCell", for: indexPath)
-                
-                cell.addSubview(graphs[indexPath.row]) //ORDER CHANGES HERE
-                // add constraints on the graph view inside it's cell. 0 padding from all sides
-                cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
-                cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
-                gradients[indexPath.row].frame = cell.layer.bounds //ORDER CHANGES HERE
-                cell.layer.insertSublayer(gradients[indexPath.row], at: 0)
-                return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GraphCell", for: indexPath)
+            cell.addSubview(graphs[indexPath.row])
+            cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
+            cell.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":graphs[indexPath.row]]))
+            gradients[indexPath.row].frame = cell.layer.bounds //ORDER CHANGES HERE
+            cell.layer.insertSublayer(gradients[indexPath.row], at: 0)
+            return cell
         }
         else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
-            if indexPath.row == 1 {
-                cell.addSubview(playPauseButton!)
-            }else if indexPath.row == 2{
-                cell.addSubview(muteMusic!)
-            }else{
-                cell.addSubview(skinTemperatureLabel!)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellIdentifier, for: indexPath)
+            if indexPath.row == 0 {
+                cell.addSubview(battery!)
+            }else if indexPath.row == 1{
+                 cell.addSubview(playPauseButton!)
             }
-                return cell
+            return cell
+            
         }
         
     }
@@ -278,17 +276,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         if indexPath.section == 1{
             return CGSize(width: self.view.frame.width-5, height: (self.collectionView?.window?.frame.height)!*0.3)
         }
-        else if indexPath.section == 2 {
-              return CGSize(width: 0.30*(self.view.frame.width)-5, height:  (self.collectionView?.window?.frame.height)!*0.1)
-        }
-        else{
-            if indexPath.row == 0 {
-                return CGSize(width: 0.60*(self.view.frame.width-5), height:   (self.view.frame.height)*0.1)
-            }
-            else {
-                return CGSize(width: 0.30*(self.view.frame.width-5), height:   (self.view.frame.height)*0.1)
-            }
-    
+        else if indexPath.section == 0{
+            return CGSize(width: 0.45*(self.view.frame.width), height:   (self.view.frame.height)*0.05)
+        }else{
+            return CGSize(width: 0.45*(self.view.frame.width), height:   (self.view.frame.height)*0.1)
         }
     }
     func didUpdate(_ status: DeviceStatus, forDevice device: EmpaticaDeviceManager!) {
@@ -312,9 +303,9 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         bvpQueue.async { [unowned self] in
             self.bvpCounter += 1
             DispatchQueue.main.async(execute: {[unowned self] in
-            if self.isGraphing{
-                self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
-            }
+                if self.isGraphing{
+                    self.updateEntry(forGraph: self.graphs[0], withTimestamp: timestamp-self.timeEpoch, andValue: bvp)
+                }
             })
         }
         
@@ -325,9 +316,9 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             self.biomusic.updateGSR(newGSR: Double(gsr))
             self.gsrCounter += 1
             DispatchQueue.main.async(execute: {[unowned self] in
-            if self.isGraphing{
-                self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
-            }
+                if self.isGraphing{
+                    self.updateEntry(forGraph: self.graphs[1], withTimestamp: timestamp-self.timeEpoch, andValue: gsr)
+                }
             })
         }
         
@@ -335,6 +326,10 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
             self.biomusic.updateIBI(newIBI: Double(ibi))
+            DispatchQueue.main.async {
+                let temp = (60/Double(ibi)).rounded()
+                self.hrLabel!.text = "\(temp)bpm"
+            }
             self.ibiCounter += 1
         }
         
@@ -348,21 +343,20 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     }
     func didReceiveBatteryLevel(_ level: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         if level !=   lastBatteryReading {
-            
             lastBatteryReading = level
-        DispatchQueue.main.async {[unowned self] finished in
-        if level > 0.9 {
-             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryFull, postfixText: "", size: 25)
-        }else if level < 0.9 && level > 0.75 {
-             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryThreeQuarters, postfixText: "", size: 25)
-        }else if level > 0.4 && level < 0.75 {
-             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryHalf, postfixText: "", size: 25)
-        }else if level > 0.1 && level < 0.25 {
-             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryQuarter, postfixText: "", size: 25)
-        }else if level < 0.1 {
-             self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryEmpty, postfixText: "", size: 25)
-        }
-        }
+            DispatchQueue.main.async {[unowned self] finished in
+                if level > 0.9 {
+                    self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryFull, postfixText: "", size: 25)
+                }else if level < 0.9 && level > 0.75 {
+                    self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryThreeQuarters, postfixText: "", size: 25)
+                }else if level > 0.4 && level < 0.75 {
+                    self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryHalf, postfixText: "", size: 25)
+                }else if level > 0.1 && level < 0.25 {
+                    self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryQuarter, postfixText: "", size: 25)
+                }else if level < 0.1 {
+                    self.battery?.setFAText(prefixText:"\(Int(level*100))%", icon: .FABatteryEmpty, postfixText: "", size: 25)
+                }
+            }
         }
     }
     func didReceiveTemperature(_ temp: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
@@ -386,52 +380,66 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         self.collectionView?.layer.insertSublayer(bc, at: 0)
     }
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
-            let graphData = graph.lineData
-            let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
-            if graphDataSet.entryCount  > 2000 {
-                graphDataSet.removeFirst()
-            }
-            graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
-            graphData?.notifyDataChanged()
-            graphDataSet.notifyDataSetChanged()
-            graph.notifyDataSetChanged()
-            graph.setVisibleXRangeMaximum(10)
-            graph.moveViewToX(timestamp)
+        let graphData = graph.lineData
+        let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
+        if graphDataSet.entryCount  > 2000 {
+            graphDataSet.removeFirst()
+        }
+        graphDataSet.addEntry(ChartDataEntry(x: timestamp, y: Double(value)))
+        graphData?.notifyDataChanged()
+        graphDataSet.notifyDataSetChanged()
+        graph.notifyDataSetChanged()
+        graph.setVisibleXRangeMaximum(10)
+        graph.moveViewToX(timestamp)
     }
     
     func configureSkinTemperatureLabel(){
         skinTemperatureLabel = UILabel(frame: CGRect(x: 0, y: 0,
-                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
-                                                 height: CGFloat((self.view.frame.height)*0.1)))
+                                                     width: CGFloat(0.45*(self.view.frame.width)),
+                                                     height: CGFloat((self.view.frame.height)*0.05)))
         skinTemperatureLabel?.lineBreakMode = .byWordWrapping
         skinTemperatureLabel?.text = "--C°"
-        skinTemperatureLabel?.font = UIFont(name: "Helvetica", size: 22)
+        skinTemperatureLabel?.font = UIFont(name: "Helvetica", size: 20)
         skinTemperatureLabel?.textAlignment = .center
         skinTemperatureLabel?.textColor = UIColor.white
-        skinTemperatureLabel?.backgroundColor = UIColor(colorLiteralRed: 0.909 , green: 0.255, blue: 0.231, alpha: 1.00)
-        skinTemperatureLabel?.layer.cornerRadius = 10
+        skinTemperatureLabel?.backgroundColor = UIColor(colorLiteralRed: 0.035 , green: 0.420, blue: 0.573, alpha: 1.00)
+        skinTemperatureLabel?.layer.cornerRadius = 5
         skinTemperatureLabel?.clipsToBounds  = true
         
+    }
+    
+    func configureHRLabel(){
+        hrLabel = UILabel(frame: CGRect(x: 0, y: 0,
+                                                     width: CGFloat(0.45*(self.view.frame.width)),
+                                                     height: CGFloat((self.view.frame.height)*0.05)))
+        hrLabel?.lineBreakMode = .byWordWrapping
+        hrLabel?.text = "--bpm"
+        hrLabel?.font = UIFont(name: "Helvetica", size: 20)
+        hrLabel?.textAlignment = .center
+        hrLabel?.textColor = UIColor.white
+        hrLabel?.backgroundColor = UIColor(colorLiteralRed: 0.035 , green: 0.420, blue: 0.573, alpha: 1.00)
+        hrLabel?.layer.cornerRadius = 5
+        hrLabel?.clipsToBounds  = true
     }
     
     func configurePlayPauseButton(){
         
         
         playPauseButton = UIButton(frame: CGRect(x: 0, y: 0,
-                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
+                                                 width: CGFloat(0.45*(self.view.frame.width)),
                                                  height: CGFloat((self.view.frame.height)*0.1)))
         playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
         playPauseButton?.contentVerticalAlignment = .center
         playPauseButton?.setFATitleColor(color: UIColor.white)
-        playPauseButton?.backgroundColor = UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        playPauseButton?.backgroundColor = UIColor(colorLiteralRed: 0.909 , green: 0.255, blue: 0.231, alpha: 1.00)
         playPauseButton?.layer.cornerRadius = 10
         playPauseButton?.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         
     }
     func configureMuteMusicButton(){
         muteMusic = UIButton(frame: CGRect(x: 0, y: 0,
-                                                 width: CGFloat(0.30*(self.view.frame.width)-5),
-                                                 height: CGFloat((self.view.frame.height)*0.1)))
+                                           width: CGFloat(0.45*(self.view.frame.width)),
+                                           height: CGFloat((self.view.frame.height)*0.1)))
         muteMusic?.setFAIcon(icon: .FAVolumeUp, iconSize:40, forState: .normal)
         muteMusic?.contentVerticalAlignment = .center
         muteMusic?.setFATitleColor(color: UIColor.white)
@@ -452,20 +460,21 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         if isGraphing {
             playPauseButton?.setFAIcon(icon: .FAPlay, iconSize:40, forState: .normal)
             isGraphing = false
+            biomusic.isPlaying = false
         }else{
             playPauseButton?.setFAIcon(icon: .FAPause, iconSize:40, forState: .normal)
             isGraphing = true
+            biomusic.isPlaying = true
         }
-
+        
     }
     func setupBatteryLabel(){
-        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.30*(self.view.frame.width-5), height: (self.view.frame.height)*0.1))
+        self.battery = UILabel(frame: CGRect(x: 0, y: 0, width: 0.45*(self.view.frame.width-5), height: (self.view.frame.height)*0.1))
         self.battery?.font = UIFont(name: "Helvetica", size: 26)
-        battery?.backgroundColor =  UIColor(colorLiteralRed: 0.957, green: 0.698, blue: 0.203, alpha: 1.00)
+        battery?.backgroundColor =  UIColor(colorLiteralRed: 0.909 , green: 0.255, blue: 0.231, alpha: 1.00)
         battery?.layer.cornerRadius = 10
         battery?.clipsToBounds  = true
         self.battery?.textAlignment = .center
-        //self.battery?.setFAText(prefixText:"100%", icon: .FABatteryFull, postfixText: "", size: 25)
         self.battery?.textColor = UIColor.white
     }
     override func viewWillDisappear(_ animated: Bool) {

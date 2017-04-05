@@ -20,14 +20,10 @@ class GraphCollectionViewCell: UICollectionViewCell {
     }
     func setupViews(){
         self.addSubview(graphChart)
-//        self.clipsToBounds = true
-//        self.layer.cornerRadius = 10
+
         graphChart.layer.cornerRadius = 10
         graphChart.clipsToBounds = true
         
-        //self.backgroundColor = UIColor.blue
-        //graphChart.backgroundColor = UIColor.red
-        //graphChart.layer =
         graphChart.layer.borderWidth = 1
         graphChart.layer.borderColor = UIColor.white.cgColor
         
