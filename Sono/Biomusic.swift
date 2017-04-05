@@ -45,7 +45,7 @@ class  Biomusic {
     var GSRMovingAvgFilter: [Double] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var GSRReadings: [Double] = [0, 0, 0, 0, 0]
     var newGSRReading: Double = 0.0
-    var deltaEDA     : Double = 0.0005
+    var deltaEDA     : Double = 0.0015
     var baselineEDA : Double = 0
     var currentEDA  : Double = 0.1
     
@@ -153,17 +153,15 @@ class  Biomusic {
             timer2 = Timer.scheduledTimer(timeInterval: timerFrequency/4, target: self, selector: #selector(playMelody), userInfo: nil, repeats: true)
         }
         
-        if (abs(currentTemp - baselineTemp) > deltaTemp){
+        if (abs(currentTemp) > deltaTemp){
             //print("current temp     ", currentTemp, "baseline temp     ", baselineTemp)
             stopChord(note: Notes(rawValue: currentChord)!, scale: .Major)
             
-            if (currentTemp > baselineTemp){    //Step up to the next chord in the cycle of fifth
+            if (currentTemp > deltaTemp){    //Step up to the next chord in the cycle of fifth
                 currentChord = Int((currentChord + 7).truncatingRemainder(dividingBy: 12))
-                baselineTemp += deltaTemp
             }
             else {      //Step down to the precious chord in the cycle of fifth
                 currentChord = Int((currentChord - 7).truncatingRemainder(dividingBy: 12))
-                baselineTemp -= deltaTemp
             }
             if (currentChord < 0){
                 currentChord = 12 + currentChord
@@ -296,14 +294,12 @@ class  Biomusic {
         //print(baselineEDA, currentEDA)
         
         // Determine note to be played based on EDA (or GSR)
-        if (abs(currentEDA - baselineEDA) > deltaEDA){
-            if (currentEDA > baselineEDA){    //Step up to the next chord in the cycle of fifth
+        if (abs(currentEDA) > deltaEDA){
+            if (currentEDA > deltaEDA){    //Step up to the next chord in the cycle of fifth
                 scaleIndex = Int((scaleIndex + 1).truncatingRemainder(dividingBy: 7))
-                baselineEDA += deltaEDA
             }
             else {      //Step down to the precious chord in the cycle of fifth
                 scaleIndex = Int((scaleIndex - 1).truncatingRemainder(dividingBy: 7))
-                baselineEDA -= deltaEDA
             }
             if (scaleIndex < 0){
                 scaleIndex = 7 + scaleIndex
