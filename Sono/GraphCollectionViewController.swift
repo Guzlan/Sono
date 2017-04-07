@@ -63,7 +63,11 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var playPauseButton : UIButton?
     var muteMusic : UIButton?
     
-    
+    var graphGarbageDataCount = 0;
+    var minGSRValue = 10.0;
+    var minGSRValueTimeout = 45;
+    var maxGSRValue = 0.0;
+    var maxGSRValueTimeout = 45;
     
     var isGraphing = true
     var isMute = false
@@ -152,6 +156,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
                 graphs[i].chartDescription?.text = "BVP"
             }else{
                 graphs[i].chartDescription?.text = "EDA "
+                //graphs[1].leftAxis.axisMinimum = 0.15
             }
             setChartData(forChart: graphs[i], withNumber: i)
         }
@@ -322,6 +327,27 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             })
         }
         
+        //Set new bounds for graphing
+        if (((Double(gsr) < minGSRValue) && (Double(gsr) != 0.0)) || minGSRValueTimeout == 0){
+            minGSRValue = Double(gsr) - 0.005
+            minGSRValueTimeout = 45
+            self.graphs[1].leftAxis.axisMinimum = minGSRValue
+        }
+        else {
+            minGSRValueTimeout = minGSRValueTimeout - 1
+        }
+        
+        if (((Double(gsr) > maxGSRValue)) || maxGSRValueTimeout == 0){
+            maxGSRValue = Double(gsr) + 0.005
+            maxGSRValueTimeout = 45
+            self.graphs[1].leftAxis.axisMaximum = maxGSRValue
+        }
+        else {
+            maxGSRValueTimeout = maxGSRValueTimeout - 1
+        }
+        
+        
+        print(graphGarbageDataCount, minGSRValue, minGSRValueTimeout)
     }
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
@@ -379,6 +405,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         bc.zPosition = -1
         self.collectionView?.layer.insertSublayer(bc, at: 0)
     }
+    
     func updateEntry (forGraph graph: LineChartView, withTimestamp timestamp : Double, andValue value : Float){
         let graphData = graph.lineData
         let graphDataSet = graph.lineData?.dataSets[0] as! LineChartDataSet
