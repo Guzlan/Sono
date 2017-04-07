@@ -45,7 +45,7 @@ class  Biomusic {
     var GSRMovingAvgFilter: [Double] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var GSRReadings: [Double] = [0, 0, 0, 0, 0]
     var newGSRReading: Double = 0.0
-    var deltaEDA     : Double = 0.0015
+    var deltaEDA     : Double = 0.0006
     var baselineEDA : Double = 0
     var currentEDA  : Double = 0.1
     
@@ -94,7 +94,7 @@ class  Biomusic {
         mandolin.presetLargeResonantMandolin()
         let mandolinReverb = AKCostelloReverb(mandolin)
         
-        mandolinReverb.feedback = 0.99
+        mandolinReverb.feedback = 0.9
         
         mandolin2.detune = 1
         mandolin2.bodySize = 1.95
@@ -103,7 +103,7 @@ class  Biomusic {
         
         let mandolin2Reverb = AKCostelloReverb(mandolin2Effect)
         
-        mandolin2Reverb.feedback = 2
+        mandolin2Reverb.feedback = 0.9
         
         // Prepare Output
         let music = AKMixer(mandolinReverb, mandolin2Reverb, clarinet)
@@ -305,8 +305,7 @@ class  Biomusic {
                 scaleIndex = 7 + scaleIndex
             }
         }
-        
-        playMelodyNote(note: currentChord + majorScale[scaleIndex], generator: 1, octave: 4)
+        playMelodyNote(note: currentChord + majorScale[scaleIndex], generator: 1, octave: 3)
         }
     }
     
