@@ -63,11 +63,17 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     var playPauseButton : UIButton?
     var muteMusic : UIButton?
     
-    var graphGarbageDataCount = 0;
-    var minGSRValue = 10.0;
-    var minGSRValueTimeout = 45;
-    var maxGSRValue = 0.0;
-    var maxGSRValueTimeout = 45;
+    //The following variables are for autoscaling
+    var minGSRValue = 10.0
+    var minGSRValueTimeout = 45
+    var maxGSRValue = 0.0
+    var maxGSRValueTimeout = 45
+    
+    var minBVPValue = -100.0
+    var minBVPValueTimeout = 500
+    var maxBVPValue = 100.0
+    var maxBVPValueTimeout = 500
+    
     
     var isGraphing = true
     var isMute = false
@@ -75,7 +81,6 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     override func viewDidAppear(_ animated: Bool) {
         startNewSession()
     }
-    
     
     override func viewDidLoad() {
     
@@ -135,8 +140,8 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     func setUp(graphs: [LineChartView]){
         for i in 0..<graphs.count{
             graphs[i].layer.cornerRadius = 10
-            graphs[i].layer.borderColor = UIColor.black.cgColor
-            graphs[i].layer.borderWidth = 0.5
+            graphs[i].layer.borderColor = UIColor.orange.cgColor
+            graphs[i].layer.borderWidth = 0.1
             graphs[i].clipsToBounds = true
             graphs[i].noDataText = self.noGraphDataMessages[i]
             graphs[i].translatesAutoresizingMaskIntoConstraints = false
@@ -150,6 +155,9 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             graphs[i].leftAxis.labelTextColor = UIColor.white
             graphs[i].xAxis.labelTextColor = UIColor.white
             graphs[i].xAxis.axisMinimum = 0
+            graphs[i].leftAxis.drawGridLinesEnabled = false
+            //graphs[i].xAxis.drawGridLinesEnabled = false
+            //graphs[i].rightAxis.drawGridLinesEnabled = false
             if i == 0 {
                 graphs[i].leftAxis.axisMinimum = -100.00
                 graphs[i].leftAxis.axisMaximum = 100.00
@@ -223,7 +231,6 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         let set = LineChartDataSet()
         set.values = entries
         
-        
         // removing the right axis, we're only interested in the left axis
         let rightAxis = chart.getAxis(.right)
         rightAxis.drawAxisLineEnabled = false
@@ -279,7 +286,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 1{
-            return CGSize(width: self.view.frame.width-5, height: (self.collectionView?.window?.frame.height)!*0.3)
+            return CGSize(width: self.view.frame.width-20, height: (self.collectionView?.window?.frame.height)!*0.3)
         }
         else if indexPath.section == 0{
             return CGSize(width: 0.45*(self.view.frame.width), height:   (self.view.frame.height)*0.05)
@@ -314,6 +321,24 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
             })
         }
         
+        //Set new bounds for graphing
+//        if (((Double(bvp) < minBVPValue)) || minBVPValueTimeout == 0){
+//            minBVPValue = Double(bvp) - 50
+//            minBVPValueTimeout = 500
+//            self.graphs[0].leftAxis.axisMinimum = minBVPValue
+//        }
+//        else {
+//            minBVPValueTimeout = minBVPValueTimeout - 1
+//        }
+//        
+//        if (((Double(bvp) > maxBVPValue)) || maxBVPValueTimeout == 0){
+//            maxBVPValue = Double(bvp) + 50
+//            maxBVPValueTimeout = 500
+//            self.graphs[0].leftAxis.axisMaximum = maxBVPValue
+//        }
+//        else {
+//            maxBVPValueTimeout = maxBVPValueTimeout - 1
+//        }
         
     }
     func didReceiveGSR(_ gsr: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
@@ -329,7 +354,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         
         //Set new bounds for graphing
         if (((Double(gsr) < minGSRValue) && (Double(gsr) != 0.0)) || minGSRValueTimeout == 0){
-            minGSRValue = Double(gsr) - 0.005
+            minGSRValue = Double(gsr) - 0.015
             minGSRValueTimeout = 45
             self.graphs[1].leftAxis.axisMinimum = minGSRValue
         }
@@ -338,16 +363,13 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         }
         
         if (((Double(gsr) > maxGSRValue)) || maxGSRValueTimeout == 0){
-            maxGSRValue = Double(gsr) + 0.005
+            maxGSRValue = Double(gsr) + 0.015
             maxGSRValueTimeout = 45
             self.graphs[1].leftAxis.axisMaximum = maxGSRValue
         }
         else {
             maxGSRValueTimeout = maxGSRValueTimeout - 1
         }
-        
-        
-        print(graphGarbageDataCount, minGSRValue, minGSRValueTimeout)
     }
     func didReceiveIBI(_ ibi: Float, withTimestamp timestamp: Double, fromDevice device: EmpaticaDeviceManager!) {
         ibiQueue.async {[unowned self] in
