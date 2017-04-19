@@ -93,8 +93,10 @@ class  Biomusic {
         mandolin.rampTime = 10000
         mandolin.presetLargeResonantMandolin()
         let mandolinReverb = AKCostelloReverb(mandolin)
+        let kickReverb = AKReverb(kick)
         
         mandolinReverb.feedback = 0.9
+        kickReverb.loadFactoryPreset(.mediumRoom)
         
         mandolin2.detune = 1
         mandolin2.bodySize = 1.95
@@ -108,7 +110,7 @@ class  Biomusic {
         // Prepare Output
         let music = AKMixer(mandolinReverb, mandolin2Reverb, clarinet)
         let reverb = AKReverb(music)
-        let mix = AKMixer(kick, snare, reverb)
+        let mix = AKMixer(kickReverb, snare, reverb)
         
         AudioKit.output = mix
         AudioKit.start()
@@ -141,7 +143,7 @@ class  Biomusic {
      @objc func playContinuousChord(){
         if isPlaying{
         let lastChord = currentChord
-        kick.play(noteNumber: 100, velocity: 55)
+        kick.play(noteNumber: 50, velocity: 5)
         
         // Invalidate old timers, reinitialize them with new frequencies (IBI)
         if (timerFrequency != newTimerFrequency){

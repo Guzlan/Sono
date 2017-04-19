@@ -141,7 +141,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
         for i in 0..<graphs.count{
             graphs[i].layer.cornerRadius = 10
             graphs[i].layer.borderColor = UIColor.orange.cgColor
-            graphs[i].layer.borderWidth = 0.1
+            graphs[i].layer.borderWidth = 0
             graphs[i].clipsToBounds = true
             graphs[i].noDataText = self.noGraphDataMessages[i]
             graphs[i].translatesAutoresizingMaskIntoConstraints = false
@@ -286,7 +286,7 @@ class GraphCollectionViewController: UICollectionViewController, UICollectionVie
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 1{
-            return CGSize(width: self.view.frame.width-20, height: (self.collectionView?.window?.frame.height)!*0.3)
+            return CGSize(width: self.view.frame.width-10, height: (self.collectionView?.window?.frame.height)!*0.3)
         }
         else if indexPath.section == 0{
             return CGSize(width: 0.45*(self.view.frame.width), height:   (self.view.frame.height)*0.05)
