@@ -22,7 +22,6 @@ class ViewController: UIViewController, BWWalkthroughViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func startWalkThrough(_ sender: UIButton) {
-        
         initializePages()
     }
     func initializePages (){

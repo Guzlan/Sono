@@ -333,7 +333,7 @@
         <scene sceneID="HMd-zd-L5L">
             <objects>
                 <collectionViewController id="lf9-dP-iPv" customClass="GraphCollectionViewController" customModule="Sono" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GhF-f9-2l4">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="GhF-f9-2l4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -398,7 +398,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mbe-9n-BpG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="C4P-Dc-CDI"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jwA-DZ-CCq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jwA-DZ-CCq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
