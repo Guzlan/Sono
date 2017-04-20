@@ -93,46 +93,61 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
             }
         }
         
-        
-        
-        
-        if devices.count > 0 {
-            print("I was able to find \(devices.count)")
-            
-            
-            for thisDevice in devices as! [EmpaticaDeviceManager] {
-                let deviceName = thisDevice.name
-                print(deviceName)
-    
-                if let myInt: Int? = Int(userDeviceID.text!){
-    
-                    if (deviceName! == deviceDictionary[myInt!]!){
-                        scanStatusLabel.text = "Success detecting Device"
-                        scanStatusLabel.textColor = UIColor.green
-                        buttonColour = UIColor.green.cgColor
-                    
-                        device = thisDevice
-                    
-                        performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
-                    
+        // Did the user not input anything?
+        if (userDeviceID.text == ""){
+            scanStatusLabel.text = "You did not enter a device ID"
+            scanStatusLabel.textColor = UIColor.yellow
+            buttonColour = UIColor.yellow.cgColor
+        }
+        // The user entered a value. Is it a valid number?
+        else if let myInt = Int(userDeviceID.text!){
+            // Check if device exists in dictionary (device supported by our app)
+            if ( deviceDictionary[myInt] != nil ){
+                // Start scanning
+                if devices.count > 0 {
+                    // Iterate through all available devices
+                    for thisDevice in devices as! [EmpaticaDeviceManager] {
+                        let deviceName = thisDevice.name
+                        
+                        if (deviceName == deviceDictionary[myInt]){
+                            // Indicate success finding the device to the UI
+                            scanStatusLabel.text = "Success detecting Device"
+                            scanStatusLabel.textColor = UIColor.green
+                            buttonColour = UIColor.green.cgColor
+                            
+                            device = thisDevice
+                            
+                            performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
+                            
+                        }
+                        // 0 devices were found
+                        else {
+                            scanStatusLabel.text = "Failed To Detect Device \(myInt)"
+                            scanStatusLabel.textColor = UIColor.red
+                            buttonColour = UIColor.red.cgColor
+                        }
                     }
                 }
-                
+                // 0 devices were found
+                else{
+                    print("We were not able to find any device")
+                    scanStatusLabel.text = "Failed To Detect Device"
+                    scanStatusLabel.textColor = UIColor.red
+                    buttonColour = UIColor.red.cgColor
+                }
             }
-            
-            
-            
-//            if let foundDevice =  (devices[0] as? EmpaticaDeviceManager){
-//                print(foundDevice.name)
-//                device = foundDevice
-//                performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
-//            }
+            // Device does not exist in dictionary (Not supported)
+            else {
+                scanStatusLabel.text = "We were not able to find a device with this ID"
+                scanStatusLabel.textColor = UIColor.yellow
+                buttonColour = UIColor.yellow.cgColor
+            }
         }
-        else{
-            print("I was not able to find devices")
-            scanStatusLabel.text = "Failed To Detect Device"
-            scanStatusLabel.textColor = UIColor.red
-            buttonColour = UIColor.red.cgColor
+        // The device ID entered is not a number
+        else {
+            scanStatusLabel.text = "Please enter a valid device ID"
+            scanStatusLabel.textColor = UIColor.yellow
+            buttonColour = UIColor.yellow.cgColor
         }
     }
     func didUpdate(_ status: BLEStatus) {
