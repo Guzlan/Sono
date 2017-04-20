@@ -16,7 +16,23 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     var timer = Timer()
     var buttonColour = UIColor.white.cgColor
     
-    var deviceDictionary: [Int:String] = [1: "Empatica E4 - A002B6", 2: "Empatica E4 - A011DB", 3:"Empatica E4 - A012EE", 4: "Empatica E4 - A01326"]
+    var deviceDictionary: [Int:String] = [
+         1: "Empatica E4 - A002B6",
+         2: "Empatica E4 - A011DB",
+         3: "Empatica E4 - A012EE",
+         4: "Empatica E4 - A01326",
+         5: "Empatica E4 - A013A5",
+         6: "Empatica E4 - A01524",
+         7: "Empatica E4 - A01353",
+         8: "Empatica E4 - A01317",
+         9: "Empatica E4 - A0140F",
+        10: "Empatica E4 - A01087",
+        11: "Empatica E4 - A011E1",
+        12: "Empatica E4 - A01338",
+        13: "Empatica E4 - A011AE",
+        14: "Empatica E4 - A012B2",
+        15: "Empatica E4 - A010FE",
+        16: "Empatica E4 - A01121"  ]
     
     @IBOutlet weak var scanStatusLabel: UILabel!
     @IBOutlet weak var senderBtn: UIButton!
