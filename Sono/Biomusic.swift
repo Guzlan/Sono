@@ -58,7 +58,7 @@ class  Biomusic {
     var currentChord: Int    = 0
     var pluckPosition   = 0.5
     var mandolin2PluckPosition = 0.2
-    var majorScale = [0,2,4,5,7,9,11]
+    var majorScale = [0,2,4,5,7,9,11,12,14,16,17,19,21,23]
     var scaleIndex = 0
     var melodyVelocity = 50
     var chordsVelocity = 127
@@ -298,13 +298,13 @@ class  Biomusic {
         // Determine note to be played based on EDA (or GSR)
         if (abs(currentEDA) > deltaEDA){
             if (currentEDA > deltaEDA){    //Step up to the next chord in the cycle of fifth
-                scaleIndex = Int((scaleIndex + 1).truncatingRemainder(dividingBy: 7))
+                scaleIndex = Int((scaleIndex + 1).truncatingRemainder(dividingBy: (Double)(majorScale.count)))
             }
             else {      //Step down to the precious chord in the cycle of fifth
-                scaleIndex = Int((scaleIndex - 1).truncatingRemainder(dividingBy: 7))
+                scaleIndex = Int((scaleIndex - 1).truncatingRemainder(dividingBy: (Double)(majorScale.count)))
             }
             if (scaleIndex < 0){
-                scaleIndex = 7 + scaleIndex
+                scaleIndex = majorScale.count + scaleIndex
             }
         }
         playMelodyNote(note: currentChord + majorScale[scaleIndex], generator: 1, octave: 3)
