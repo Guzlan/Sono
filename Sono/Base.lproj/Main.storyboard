@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVy-l2-k8o">
-                                <rect key="frame" x="134.5" y="314" width="106" height="39"/>
+                                <rect key="frame" x="134" y="401" width="106" height="39"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
                                 <state key="normal" title="Get Started">
                                     <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -34,10 +34,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sono" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70x-nO-9hl">
-                                <rect key="frame" x="58" y="187" width="259" height="119"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="119" id="2Vz-Ng-iQQ"/>
-                                </constraints>
+                                <rect key="frame" x="58" y="274" width="259" height="119"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -45,11 +42,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.70588235290000001" green="0.1137254902" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="hVy-l2-k8o" firstAttribute="top" secondItem="70x-nO-9hl" secondAttribute="bottom" constant="8" symbolic="YES" id="0tJ-PD-T1u"/>
-                            <constraint firstItem="70x-nO-9hl" firstAttribute="leading" secondItem="0oU-Nl-7UH" secondAttribute="leadingMargin" constant="42" id="8Se-89-Idd"/>
-                            <constraint firstItem="70x-nO-9hl" firstAttribute="centerX" secondItem="0oU-Nl-7UH" secondAttribute="centerX" id="ALw-IQ-y9b"/>
-                            <constraint firstItem="hVy-l2-k8o" firstAttribute="centerY" secondItem="0oU-Nl-7UH" secondAttribute="centerY" id="DRw-ss-r7J"/>
-                            <constraint firstItem="hVy-l2-k8o" firstAttribute="centerX" secondItem="0oU-Nl-7UH" secondAttribute="centerX" id="npK-as-ovB"/>
+                            <constraint firstItem="70x-nO-9hl" firstAttribute="centerY" secondItem="0oU-Nl-7UH" secondAttribute="centerY" id="1xs-ew-7qq"/>
+                            <constraint firstItem="70x-nO-9hl" firstAttribute="leading" secondItem="0oU-Nl-7UH" secondAttribute="leadingMargin" constant="42" id="L8u-39-ZJZ"/>
+                            <constraint firstItem="hVy-l2-k8o" firstAttribute="top" secondItem="70x-nO-9hl" secondAttribute="bottom" constant="8" symbolic="YES" id="UIx-Xa-YZS"/>
+                            <constraint firstItem="70x-nO-9hl" firstAttribute="centerX" secondItem="0oU-Nl-7UH" secondAttribute="centerX" id="eTk-IB-1ie"/>
+                            <constraint firstItem="70x-nO-9hl" firstAttribute="top" secondItem="qTf-ER-RJ0" secondAttribute="bottom" constant="254" id="fB4-28-dyA"/>
+                            <constraint firstItem="70x-nO-9hl" firstAttribute="centerX" secondItem="hVy-l2-k8o" secondAttribute="centerX" id="u6W-s3-Rwr"/>
                         </constraints>
                     </view>
                 </viewController>
