@@ -16,8 +16,11 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
     var timer = Timer()
     var buttonColour = UIColor.white.cgColor
     
+    var deviceDictionary: [Int:String] = [1: "Empatica E4 - A002B6", 2: "Empatica E4 - A011DB", 3:"Empatica E4 - A012EE", 4: "Empatica E4 - A01326"]
+    
     @IBOutlet weak var scanStatusLabel: UILabel!
     @IBOutlet weak var senderBtn: UIButton!
+    @IBOutlet weak var userDeviceID: UITextField!
     
     @IBAction func scanDevices(_ sender: UIButton) {
         print("Started scanning for E4's...")
@@ -34,6 +37,17 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
         senderBtn.layer.borderWidth = 4
         senderBtn.layer.borderColor = borderColor.cgColor
         scanStatusLabel.text = ""
+        
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        
+        
         let iOSDevice = Device()
         switch iOSDevice{
         case .iPhone6sPlus:
@@ -47,6 +61,8 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
         default:
             print("Not really sure what iOS device this is")
         }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,15 +92,41 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
                 performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
             }
         }
+        
+        
+        
+        
         if devices.count > 0 {
             print("I was able to find \(devices.count)")
-            scanStatusLabel.text = "Success detecting Device"
-            scanStatusLabel.textColor = UIColor.green
-            buttonColour = UIColor.green.cgColor
-            if let foundDevice =  (devices[0] as? EmpaticaDeviceManager){
-                device = foundDevice
-                performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
+            
+            
+            for thisDevice in devices as! [EmpaticaDeviceManager] {
+                let deviceName = thisDevice.name
+                print(deviceName)
+    
+                if let myInt: Int? = Int(userDeviceID.text!){
+    
+                    if (deviceName! == deviceDictionary[myInt!]!){
+                        scanStatusLabel.text = "Success detecting Device"
+                        scanStatusLabel.textColor = UIColor.green
+                        buttonColour = UIColor.green.cgColor
+                    
+                        device = thisDevice
+                    
+                        performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
+                    
+                    }
+                }
+                
             }
+            
+            
+            
+//            if let foundDevice =  (devices[0] as? EmpaticaDeviceManager){
+//                print(foundDevice.name)
+//                device = foundDevice
+//                performSegue(withIdentifier: "displayGraphsSegue", sender: nil)
+//            }
         }
         else{
             print("I was not able to find devices")
@@ -126,5 +168,9 @@ class mainViewController :UIViewController, EmpaticaDelegate , EmpaticaDeviceDel
             mainDestinationVc.connectedE4 = device
         }
     }
-
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 }
