@@ -30,11 +30,13 @@ class ViewController: UIViewController, BWWalkthroughViewControllerDelegate {
         let intro = stb.instantiateViewController(withIdentifier: "intro")
         let step1 = stb.instantiateViewController(withIdentifier: "step1")
         let step2 = stb.instantiateViewController(withIdentifier: "step2")
+        let step3 = stb.instantiateViewController(withIdentifier: "step3")
         // Attach the pages to the master
         walkthrough.delegate = self
         walkthrough.addViewController(intro)
         walkthrough.addViewController(step1)
         walkthrough.addViewController(step2)
+        walkthrough.addViewController(step3)
         self.present(walkthrough, animated: true, completion: nil)
         
     }

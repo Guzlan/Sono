@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D679A271EA8842200C5193E /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D679A241EA8842200C5193E /* 1.png */; };
+		3D679A281EA8842200C5193E /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D679A251EA8842200C5193E /* 2.png */; };
+		3D679A291EA8842200C5193E /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D679A261EA8842200C5193E /* 3.png */; };
 		3D79F4F11E92EA4500122446 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D79F4F01E92EA4500122446 /* TabBarViewController.swift */; };
 		3D79F4F51E92EAE900122446 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D79F4F41E92EAE900122446 /* AboutViewController.swift */; };
 		9E06FC6D87A809B8A912CA5D /* Pods_Sono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */; };
@@ -79,6 +82,9 @@
 
 /* Begin PBXFileReference section */
 		1186ECF31F5553DD0DB9B03C /* Pods_Sono.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sono.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D679A241EA8842200C5193E /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		3D679A251EA8842200C5193E /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		3D679A261EA8842200C5193E /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		3D79F4F01E92EA4500122446 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		3D79F4F41E92EAE900122446 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C50D4FCE1DC1638E009F1505 /* GraphCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +183,9 @@
 		C5CD0EF61DA14B0D00B1355D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3D679A241EA8842200C5193E /* 1.png */,
+				3D679A251EA8842200C5193E /* 2.png */,
+				3D679A261EA8842200C5193E /* 3.png */,
 				C5E795CC1DEFB07600C00472 /* dropboxLogo.png */,
 				C57941E71DA3F286002FE927 /* heart-7.png */,
 				C5CD0EF41DA14AF700B1355D /* e4.png */,
@@ -305,10 +314,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5E795CD1DEFB07600C00472 /* dropboxLogo.png in Resources */,
+				3D679A271EA8842200C5193E /* 1.png in Resources */,
 				C57941EA1DA3F3B0002FE927 /* heart-rate-graph-big-red-35515205.jpg in Resources */,
 				C54372CD1DA01BB900BBCD87 /* LaunchScreen.storyboard in Resources */,
 				C57941E81DA3F286002FE927 /* heart-7.png in Resources */,
+				3D679A291EA8842200C5193E /* 3.png in Resources */,
 				C54372CA1DA01BB900BBCD87 /* Assets.xcassets in Resources */,
+				3D679A281EA8842200C5193E /* 2.png in Resources */,
 				C54372C81DA01BB900BBCD87 /* Main.storyboard in Resources */,
 				C5CD0EF51DA14AF700B1355D /* e4.png in Resources */,
 			);
