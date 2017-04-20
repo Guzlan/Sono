@@ -250,7 +250,7 @@
 				TargetAttributes = {
 					C54372BE1DA01BB900BBCD87 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = UT6TK6B6QY;
+						DevelopmentTeam = 8RXEM6A5PT;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -527,7 +527,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UT6TK6B6QY;
+				DEVELOPMENT_TEAM = 8RXEM6A5PT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -535,7 +535,7 @@
 				INFOPLIST_FILE = Sono/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zeyad.saleh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hazem.saleh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;
@@ -548,7 +548,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UT6TK6B6QY;
+				DEVELOPMENT_TEAM = 8RXEM6A5PT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -556,7 +556,7 @@
 				INFOPLIST_FILE = Sono/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zeyad.saleh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hazem.saleh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = $SRCROOT/Sono/EmpaticaBridge.h;
 				SWIFT_VERSION = 3.0;

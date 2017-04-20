@@ -43,7 +43,7 @@ class  Biomusic {
     var currentGSRReadings = 0
     var GSRMatrixIndex = 0
     var GSRMovingAvgFilter: [Double] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    var GSRReadings: [Double] = [0, 0, 0, 0, 0]
+    var GSRReadings: [Double] = [0, 0, 0, 0, 0, 0]
     var newGSRReading: Double = 0.0
     var deltaEDA     : Double = 0.0006
     var baselineEDA : Double = 0
